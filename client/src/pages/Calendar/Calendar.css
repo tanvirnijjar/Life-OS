@@ -48,3 +48,117 @@
   color: #777;
   padding: 40px 0;
 }
+/* ===========================
+   Calendar Header
+=========================== */
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.calendar-header h1 {
+  color: white;
+  font-size: 36px;
+}
+
+.calendar-header button {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.calendar-header button:hover {
+  background: #1d4ed8;
+}
+/* ===========================
+   Day Cell
+=========================== */
+
+.day-cell {
+  background: #1e293b;
+  min-height: 110px;
+  border-radius: 16px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  color: white;
+  font-weight: 600;
+}
+
+.day-cell:hover {
+  transform: translateY(-4px);
+  background: #334155;
+}
+
+.inactive-day {
+  opacity: 0.35;
+}
+
+.today {
+  border: 2px solid #2563eb;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+}
+/* ===========================
+   Week Days
+=========================== */
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 15px;
+  gap: 10px;
+}
+
+.weekdays div {
+  text-align: center;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+/* ===========================
+   Calendar Grid
+=========================== */
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .calendar-grid {
+    gap: 8px;
+  }
+
+  .day-cell {
+    min-height: 80px;
+  }
+}
+/* ===========================
+   Calendar Page
+=========================== */
+
+.calendar-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #111827);
+  padding: 40px;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .calendar-page {
+    padding: 20px;
+  }
+}
