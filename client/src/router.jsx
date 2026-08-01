@@ -22,7 +22,7 @@ import Calendar from "./pages/Calendar/Calendar";
 import Notes from "./pages/Notes/Notes";
 import Goals from "./pages/Goals/Goals";
 import Settings from "./pages/Settings/Settings";
-
+import Tasks from "./pages/Tasks/Tasks";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,6 +75,10 @@ const router = createBrowserRouter([
                 path: "settings",
                 element: <Settings />,
               },
+              {
+  path: "/tasks",
+  element: <Tasks />,
+},
             ],
           },
         ],

@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import {
   FiHome,
+  FiCheckSquare,
   FiCalendar,
   FiFileText,
   FiTarget,
@@ -14,6 +15,11 @@ const menuItems = [
     name: "Dashboard",
     path: "/dashboard",
     icon: <FiHome />,
+  },
+  {
+    name: "Tasks",
+    path: "/tasks",
+    icon: <FiCheckSquare />,
   },
   {
     name: "Calendar",
@@ -42,14 +48,16 @@ const menuItems = [
   },
 ];
 
-const Sidebar = () => {
+function Sidebar() {
   return (
     <aside className="sidebar">
+      {/* Logo */}
       <div className="sidebar-logo">
         <h2>🌼 Life OS</h2>
         <p>Your Productivity Hub</p>
       </div>
 
+      {/* Navigation */}
       <nav className="sidebar-menu">
         {menuItems.map((item) => (
           <NavLink
@@ -65,11 +73,13 @@ const Sidebar = () => {
         ))}
       </nav>
 
+      {/* Footer */}
       <div className="sidebar-footer">
-        <small>Life OS v1.0</small>
+        <small>🌼 Life OS 3.0</small>
+        <p>Stay Focused • Stay Consistent 🚀</p>
       </div>
     </aside>
   );
-};
+}
 
 export default Sidebar;
