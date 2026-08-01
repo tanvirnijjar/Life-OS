@@ -1,22 +1,20 @@
 import { useState } from "react";
 
-function TaskForm({ tasks, setTasks }) {
+function TaskForm({ addTask }) {
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [dueDate, setDueDate] = useState("");
 
-  const addTask = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (!task.trim()) return;
 
-    const newTask = {
-      id: Date.now(),
+    addTask({
       text: task,
-      completed: false,
       priority,
       dueDate,
-    };
-
-    setTasks([...tasks, newTask]);
+    });
 
     setTask("");
     setPriority("Medium");
@@ -24,7 +22,7 @@ function TaskForm({ tasks, setTasks }) {
   };
 
   return (
-    <div className="task-input">
+    <form className="task-input" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Enter a task..."
@@ -47,10 +45,10 @@ function TaskForm({ tasks, setTasks }) {
         onChange={(e) => setDueDate(e.target.value)}
       />
 
-      <button onClick={addTask}>
+      <button type="submit">
         ➕ Add Task
       </button>
-    </div>
+    </form>
   );
 }
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Tasks.css";
+
 import { useTasks } from "../../context/TaskContext";
 
 import TaskForm from "./TaskForm";
@@ -8,24 +9,16 @@ import TaskFilter from "./TaskFilter";
 import TaskCard from "./TaskCard";
 
 function Tasks() {
-  const { tasks, setTasks } = useTasks();
+  const {
+    tasks,
+    addTask,
+    toggleTask,
+    deleteTask,
+    updateTask,
+  } = useTasks();
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
-
-  const toggleTask = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id
-          ? { ...task, completed: !task.completed }
-          : task
-      )
-    );
-  };
-
-  const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
 
   const filteredTasks = tasks
     .filter((task) =>
@@ -41,10 +34,7 @@ function Tasks() {
     <div className="tasks-page">
       <h1>✅ Task Manager</h1>
 
-      <TaskForm
-        tasks={tasks}
-        setTasks={setTasks}
-      />
+      <TaskForm addTask={addTask} />
 
       <SearchBar
         search={search}
@@ -68,6 +58,7 @@ function Tasks() {
               task={task}
               toggleTask={toggleTask}
               deleteTask={deleteTask}
+              updateTask={updateTask}
             />
           ))
         )}
