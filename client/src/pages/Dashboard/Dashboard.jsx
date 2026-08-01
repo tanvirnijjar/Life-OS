@@ -6,6 +6,8 @@ import StatsCards from "./StatsCards";
 import RecentTasks from "./RecentTasks";
 import ProgressCard from "./ProgressCard";
 import QuickActions from "./QuickActions";
+import ActiveGoals from "./ActiveGoals";
+import RecentNotes from "./RecentNotes";
 
 function Dashboard() {
   const { tasks } = useTasks();
@@ -25,7 +27,6 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-
       <WelcomeCard />
 
       <StatsCards
@@ -36,7 +37,6 @@ function Dashboard() {
       />
 
       <div className="dashboard-grid">
-
         <RecentTasks tasks={tasks} />
 
         <ProgressCard
@@ -45,10 +45,12 @@ function Dashboard() {
           productivity={productivity}
         />
 
+        <ActiveGoals />
+
+        <RecentNotes />
       </div>
 
       <QuickActions />
-
     </div>
   );
 }

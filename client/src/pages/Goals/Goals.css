@@ -1,39 +1,225 @@
+/* ===========================
+   Goals Page
+=========================== */
+
 .goals-page {
-  max-width: 1200px;
-  margin: auto;
+  min-height: 100vh;
+  background: #0f172a;
+  color: white;
+  padding: 40px;
 }
+
+.goals-page h1 {
+  font-size: 38px;
+  margin-bottom: 30px;
+}
+
+/* ===========================
+   Goal Form
+=========================== */
 
 .goal-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 15px;
-  margin: 25px 0;
+  margin-bottom: 30px;
 }
 
 .goal-form input,
 .goal-form select {
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: #334155;
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+.goal-form input::placeholder {
+  color: #cbd5e1;
 }
 
 .goal-form button {
+  width: 100%;
+  height: 48px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #2563eb;
   color: white;
+  font-weight: 600;
   cursor: pointer;
-  padding: 12px;
+  transition: all 0.3s ease;
 }
+
+.goal-form button:hover {
+  background: #1d4ed8;
+}
+
+/* ===========================
+   Goals Grid
+=========================== */
 
 .goals-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
+  gap: 24px;
 }
 
-.empty-state {
+/* ===========================
+   Goal Card
+=========================== */
+
+.goal-card {
+  background: #1e293b;
+  border-radius: 18px;
+  padding: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.goal-card:hover {
+  transform: translateY(-6px);
+}
+
+.completed-goal {
+  opacity: 0.75;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.goal-header h2 {
+  margin: 0;
+  color: white;
+  font-size: 24px;
+}
+
+/* ===========================
+   Priority Badge
+=========================== */
+
+.priority {
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.priority.low {
+  background: #16a34a;
+}
+
+.priority.medium {
+  background: #eab308;
+  color: black;
+}
+
+.priority.high {
+  background: #dc2626;
+}
+
+/* ===========================
+   Progress Bar
+=========================== */
+
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background: #334155;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 18px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  transition: width 0.4s ease;
+}
+
+/* ===========================
+   Goal Details
+=========================== */
+
+.goal-card p {
+  color: #cbd5e1;
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.goal-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.complete-btn,
+.delete-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.complete-btn {
+  background: #2563eb;
+}
+
+.complete-btn:hover {
+  background: #1d4ed8;
+}
+
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+/* ===========================
+   Empty State
+=========================== */
+
+.empty-goals {
   text-align: center;
-  color: #777;
-  margin-top: 40px;
+  margin-top: 60px;
+  color: #94a3b8;
+  font-size: 18px;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media (max-width: 900px) {
+  .goals-page {
+    padding: 20px;
+  }
+
+  .goal-form {
+    grid-template-columns: 1fr;
+  }
+
+  .goal-buttons {
+    flex-direction: column;
+  }
+
+  .goals-grid {
+    grid-template-columns: 1fr;
+  }
 }

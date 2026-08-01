@@ -1,35 +1,49 @@
-import "./GoalCard.css";
+import ProgressBar from "./ProgressBar";
 
-const GoalCard = ({ goal, onDelete, updateProgress }) => {
+function GoalCard({
+  goal,
+  toggleComplete,
+  deleteGoal,
+}) {
   return (
-    <div className="goal-card">
+    <div
+      className={`goal-card ${
+        goal.completed ? "completed-goal" : ""
+      }`}
+    >
       <div className="goal-header">
-        <h3>{goal.title}</h3>
-        <span className={`priority ${goal.priority.toLowerCase()}`}>
+        <h2>{goal.title}</h2>
+
+        <span
+          className={`priority ${goal.priority.toLowerCase()}`}
+        >
           {goal.priority}
         </span>
       </div>
 
-      <p><strong>Target:</strong> {goal.targetDate}</p>
+      <ProgressBar progress={goal.progress} />
 
-      <div className="progress-container">
-        <div
-          className="progress-bar"
-          style={{ width: `${goal.progress}%` }}
-        ></div>
-      </div>
+      <h3>{goal.progress}% Complete</h3>
 
-      <p>{goal.progress}% Completed</p>
+      <p>📅 Deadline: {goal.deadline}</p>
 
-      <div className="goal-actions">
-        <button onClick={() => updateProgress(goal.id, -10)}>-10%</button>
-        <button onClick={() => updateProgress(goal.id, 10)}>+10%</button>
-        <button className="delete" onClick={() => onDelete(goal.id)}>
-          Delete
+      <div className="goal-buttons">
+        <button
+          className="complete-btn"
+          onClick={() => toggleComplete(goal.id)}
+        >
+          {goal.completed ? "↩ Reopen" : "✅ Complete"}
+        </button>
+
+        <button
+          className="delete-btn"
+          onClick={() => deleteGoal(goal.id)}
+        >
+          🗑 Delete
         </button>
       </div>
     </div>
   );
-};
+}
 
 export default GoalCard;

@@ -1,23 +1,22 @@
 import { useState } from "react";
 
-function NoteForm({ notes, setNotes }) {
+function NoteForm({ addNote }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Study");
 
-  const addNote = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     if (!title.trim() || !description.trim()) return;
 
-    const newNote = {
-      id: Date.now(),
+    addNote({
       title,
       description,
       category,
       pinned: false,
       createdAt: new Date().toLocaleDateString(),
-    };
-
-    setNotes([newNote, ...notes]);
+    });
 
     setTitle("");
     setDescription("");
@@ -25,7 +24,7 @@ function NoteForm({ notes, setNotes }) {
   };
 
   return (
-    <div className="note-form">
+    <form className="note-form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="📝 Note Title"
@@ -50,10 +49,10 @@ function NoteForm({ notes, setNotes }) {
         <option>Personal</option>
       </select>
 
-      <button onClick={addNote}>
+      <button type="submit">
         ➕ Add Note
       </button>
-    </div>
+    </form>
   );
 }
 

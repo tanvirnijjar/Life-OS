@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./Notes.css";
+
+import { useNotes } from "../../context/NoteContext";
 
 import NoteForm from "./NoteForm";
 import SearchBar from "./SearchBar";
@@ -7,33 +9,25 @@ import CategoryFilter from "./CategoryFilter";
 import NoteCard from "./NoteCard";
 
 function Notes() {
-  const [notes, setNotes] =useState(() => {
-    const saved = localStorage.getItem("lifeos_notes");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const {
+    notes,
+    addNote,
+    deleteNote,
+    updateNote,
+  } = useNotes();
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
 
-  useEffect(() => {
-    localStorage.setItem(
-      "lifeos_notes",
-      JSON.stringify(notes)
-    );
-  }, [notes]);
-
-  const deleteNote = (id) => {
-    setNotes(notes.filter((note) => note.id !== id));
-  };
-
   const togglePin = (id) => {
-    setNotes(
-      notes.map((note) =>
-        note.id === id
-          ? { ...note, pinned: !note.pinned }
-          : note
-      )
-    );
+    const note = notes.find((n) => n.id === id);
+
+    if (!note) return;
+
+    updateNote({
+      ...note,
+      pinned: !note.pinned,
+    });
   };
 
   const filteredNotes = notes
@@ -46,16 +40,13 @@ function Notes() {
       if (category === "All") return true;
       return note.category === category;
     })
-    .sort((a, b) => b.pinned - a.pinned);
+    .sort((a, b) => Number(b.pinned) - Number(a.pinned));
 
   return (
     <div className="notes-page">
       <h1>📝 Notes</h1>
 
-      <NoteForm
-        notes={notes}
-        setNotes={setNotes}
-      />
+      <NoteForm addNote={addNote} />
 
       <SearchBar
         search={search}
