@@ -1,89 +1,90 @@
 import { useEffect, useState } from "react";
 import "./Notes.css";
+
+import NoteForm from "./NoteForm";
+import SearchBar from "./SearchBar";
+import CategoryFilter from "./CategoryFilter";
 import NoteCard from "./NoteCard";
 
-const Notes = () => {
-  const [notes, setNotes] = useState(() => {
-    const saved = localStorage.getItem("lifeos-notes");
+function Notes() {
+  const [notes, setNotes] =useState(() => {
+    const saved = localStorage.getItem("lifeos_notes");
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
 
   useEffect(() => {
-    localStorage.setItem("lifeos-notes", JSON.stringify(notes));
+    localStorage.setItem(
+      "lifeos_notes",
+      JSON.stringify(notes)
+    );
   }, [notes]);
-
-  const addNote = () => {
-    if (!title.trim() || !content.trim()) return;
-
-    const newNote = {
-      id: Date.now(),
-      title,
-      content,
-    };
-
-    setNotes([newNote, ...notes]);
-    setTitle("");
-    setContent("");
-  };
 
   const deleteNote = (id) => {
     setNotes(notes.filter((note) => note.id !== id));
   };
 
-  const filteredNotes = notes.filter(
-    (note) =>
-      note.title.toLowerCase().includes(search.toLowerCase()) ||
-      note.content.toLowerCase().includes(search.toLowerCase())
-  );
+  const togglePin = (id) => {
+    setNotes(
+      notes.map((note) =>
+        note.id === id
+          ? { ...note, pinned: !note.pinned }
+          : note
+      )
+    );
+  };
+
+  const filteredNotes = notes
+    .filter((note) =>
+      note.title
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    )
+    .filter((note) => {
+      if (category === "All") return true;
+      return note.category === category;
+    })
+    .sort((a, b) => b.pinned - a.pinned);
 
   return (
     <div className="notes-page">
       <h1>📝 Notes</h1>
 
-      <div className="note-form">
-        <input
-          type="text"
-          placeholder="Note title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+      <NoteForm
+        notes={notes}
+        setNotes={setNotes}
+      />
 
-        <textarea
-          placeholder="Write your note..."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
+      <SearchBar
+        search={search}
+        setSearch={setSearch}
+      />
 
-        <button onClick={addNote}>Add Note</button>
-      </div>
-
-      <input
-        className="search-bar"
-        type="text"
-        placeholder="Search notes..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+      <CategoryFilter
+        category={category}
+        setCategory={setCategory}
       />
 
       <div className="notes-grid">
-        {filteredNotes.length > 0 ? (
+        {filteredNotes.length === 0 ? (
+          <p className="empty">
+            No notes found 📒
+          </p>
+        ) : (
           filteredNotes.map((note) => (
             <NoteCard
               key={note.id}
               note={note}
-              onDelete={deleteNote}
+              deleteNote={deleteNote}
+              togglePin={togglePin}
             />
           ))
-        ) : (
-          <p className="empty-state">No notes found.</p>
         )}
       </div>
     </div>
   );
-};
+}
 
 export default Notes;

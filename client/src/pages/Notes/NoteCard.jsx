@@ -1,20 +1,43 @@
-import "./NoteCard.css";
-
-const NoteCard = ({ note, onDelete }) => {
+function NoteCard({
+  note,
+  deleteNote,
+  togglePin,
+}) {
   return (
-    <div className="note-card">
-      <h3>{note.title}</h3>
+    <div className={`note-card ${note.pinned ? "pinned" : ""}`}>
+      <div className="note-header">
+        <h2>{note.title}</h2>
 
-      <p>{note.content}</p>
+        <button
+          className="pin-btn"
+          onClick={() => togglePin(note.id)}
+        >
+          {note.pinned ? "📌" : "📍"}
+        </button>
+      </div>
+
+      <p className="note-description">
+        {note.description}
+      </p>
+
+      <div className="note-footer">
+        <span className="note-category">
+          🏷 {note.category}
+        </span>
+
+        <span className="note-date">
+          📅 {note.createdAt}
+        </span>
+      </div>
 
       <button
-        className="delete-btn"
-        onClick={() => onDelete(note.id)}
+        className="delete-note-btn"
+        onClick={() => deleteNote(note.id)}
       >
-        Delete
+        🗑 Delete
       </button>
     </div>
   );
-};
+}
 
 export default NoteCard;

@@ -63,3 +63,93 @@
   font-size: 18px;
   padding: 40px 0;
 }
+/* ===========================
+   Search Bar
+=========================== */
+
+.notes-search {
+  margin: 25px 0;
+}
+
+.notes-search input {
+  width: 100%;
+  padding: 14px 18px;
+  border: none;
+  outline: none;
+  border-radius: 12px;
+  background: #1e293b;
+  color: white;
+  font-size: 16px;
+}
+
+.notes-search input::placeholder {
+  color: #94a3b8;
+}
+/* ===========================
+   Category Filter
+=========================== */
+
+.category-filter {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.category-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 30px;
+  background: #1e293b;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+  background: #334155;
+}
+
+.active-category {
+  background: #2563eb;
+  color: white;
+}
+/* ===========================
+   Notes Page
+=========================== */
+
+.notes-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f172a, #111827);
+  color: white;
+  padding: 40px;
+}
+
+.notes-page h1 {
+  margin-bottom: 30px;
+  font-size: 38px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 25px;
+}
+
+.empty {
+  text-align: center;
+  color: #94a3b8;
+  font-size: 18px;
+  margin-top: 50px;
+}
+
+@media (max-width: 768px) {
+  .notes-page {
+    padding: 20px;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
