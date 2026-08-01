@@ -1,0 +1,65 @@
+.notes-page {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.notes-page h1 {
+  margin-bottom: 25px;
+}
+
+.note-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.note-form input,
+.note-form textarea {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.note-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.note-form button {
+  width: fit-content;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.note-form button:hover {
+  background: #1d4ed8;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 25px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #777;
+  font-size: 18px;
+  padding: 40px 0;
+}

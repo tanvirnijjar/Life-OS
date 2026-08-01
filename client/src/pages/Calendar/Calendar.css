@@ -1,0 +1,50 @@
+.calendar-page {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.calendar-page h1 {
+  margin-bottom: 25px;
+}
+
+.event-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.event-form input {
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.event-form button {
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #777;
+  padding: 40px 0;
+}
