@@ -8,7 +8,8 @@ import ProgressCard from "./ProgressCard";
 import QuickActions from "./QuickActions";
 import ActiveGoals from "./ActiveGoals";
 import RecentNotes from "./RecentNotes";
-
+import UpcomingDeadlines from "./UpcomingDeadlines";
+import OverviewCard from "./OverviewCard";
 function Dashboard() {
   const { tasks } = useTasks();
 
@@ -48,9 +49,13 @@ function Dashboard() {
         <ActiveGoals />
 
         <RecentNotes />
+        <UpcomingDeadlines />
+        <OverviewCard/>
+        
       </div>
 
       <QuickActions />
+
     </div>
   );
 }
