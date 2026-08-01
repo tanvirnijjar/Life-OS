@@ -6,24 +6,28 @@ function StatsCards({
 }) {
   const stats = [
     {
-      title: "Tasks",
+      title: "Total Tasks",
       value: totalTasks,
-      icon: "✅",
+      icon: "📋",
+      subtitle: "All your tasks",
     },
     {
       title: "Completed",
       value: completedTasks,
-      icon: "🎉",
+      icon: "✅",
+      subtitle: "Great progress",
     },
     {
       title: "Pending",
       value: pendingTasks,
       icon: "⏳",
+      subtitle: "Keep going",
     },
     {
       title: "Productivity",
       value: `${productivity}%`,
       icon: "📈",
+      subtitle: "Today's efficiency",
     },
   ];
 
@@ -31,13 +35,17 @@ function StatsCards({
     <div className="stats-grid">
       {stats.map((item) => (
         <div className="card" key={item.title}>
-          <div className="card-icon">
-            {item.icon}
+          <div className="card-top">
+            <div className="card-icon">
+              {item.icon}
+            </div>
           </div>
 
           <h2>{item.value}</h2>
 
-          <p>{item.title}</p>
+          <h3>{item.title}</h3>
+
+          <small>{item.subtitle}</small>
         </div>
       ))}
     </div>

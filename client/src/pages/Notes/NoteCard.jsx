@@ -1,41 +1,81 @@
+import { useState } from "react";
+
 function NoteCard({
   note,
   deleteNote,
   togglePin,
+  editNote,
 }) {
+  const [editing, setEditing] = useState(false);
+  const [title, setTitle] = useState(note.title);
+  const [description, setDescription] = useState(note.description);
+
+  const saveEdit = () => {
+    editNote(note.id, {
+      title,
+      description,
+    });
+
+    setEditing(false);
+  };
+
   return (
-    <div className={`note-card ${note.pinned ? "pinned" : ""}`}>
-      <div className="note-header">
-        <h2>{note.title}</h2>
+    <div className="note-card">
+
+      {editing ? (
+        <>
+          <input
+            value={title}
+            onChange={(e) =>
+              setTitle(e.target.value)
+            }
+          />
+
+          <textarea
+            value={description}
+            onChange={(e) =>
+              setDescription(e.target.value)
+            }
+          />
+        </>
+      ) : (
+        <>
+          <h3>{note.title}</h3>
+          <p>{note.description}</p>
+        </>
+      )}
+
+      <small>{note.category}</small>
+
+      <div className="note-buttons">
+
+        {editing ? (
+          <button onClick={saveEdit}>
+            💾 Save
+          </button>
+        ) : (
+          <button
+            onClick={() => setEditing(true)}
+          >
+            ✏️ Edit
+          </button>
+        )}
 
         <button
-          className="pin-btn"
           onClick={() => togglePin(note.id)}
         >
-          {note.pinned ? "📌" : "📍"}
+          📌
         </button>
+
+        <button
+          className="delete"
+          onClick={() => deleteNote(note.id)}
+        >
+          🗑 Delete
+        </button>
+
       </div>
 
-      <p className="note-description">
-        {note.description}
-      </p>
-
-      <div className="note-footer">
-        <span className="note-category">
-          🏷 {note.category}
-        </span>
-
-        <span className="note-date">
-          📅 {note.createdAt}
-        </span>
-      </div>
-
-      <button
-        className="delete-note-btn"
-        onClick={() => deleteNote(note.id)}
-      >
-        🗑 Delete
-      </button>
     </div>
   );
 }

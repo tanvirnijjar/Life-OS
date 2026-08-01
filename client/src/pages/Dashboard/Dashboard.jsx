@@ -10,6 +10,8 @@ import ActiveGoals from "./ActiveGoals";
 import RecentNotes from "./RecentNotes";
 import UpcomingDeadlines from "./UpcomingDeadlines";
 import OverviewCard from "./OverviewCard";
+import PedometerWidget from "./PedometerWidget";
+
 function Dashboard() {
   const { tasks } = useTasks();
 
@@ -49,13 +51,15 @@ function Dashboard() {
         <ActiveGoals />
 
         <RecentNotes />
+
         <UpcomingDeadlines />
-        <OverviewCard/>
-        
+
+        <OverviewCard />
+
+        <PedometerWidget />
       </div>
 
       <QuickActions />
-
     </div>
   );
 }

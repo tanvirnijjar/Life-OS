@@ -5,9 +5,7 @@ function NoteForm({ addNote }) {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Study");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     if (!title.trim() || !description.trim()) return;
 
     addNote({
@@ -24,24 +22,31 @@ function NoteForm({ addNote }) {
   };
 
   return (
-    <form className="note-form" onSubmit={handleSubmit}>
+    <div className="note-form">
+
       <input
         type="text"
         placeholder="📝 Note Title"
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) =>
+          setTitle(e.target.value)
+        }
       />
 
       <textarea
         placeholder="Write your note..."
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(e) =>
+          setDescription(e.target.value)
+        }
         rows="5"
       />
 
       <select
         value={category}
-        onChange={(e) => setCategory(e.target.value)}
+        onChange={(e) =>
+          setCategory(e.target.value)
+        }
       >
         <option>Study</option>
         <option>Coding</option>
@@ -49,10 +54,11 @@ function NoteForm({ addNote }) {
         <option>Personal</option>
       </select>
 
-      <button type="submit">
+      <button onClick={handleSubmit}>
         ➕ Add Note
       </button>
-    </form>
+
+    </div>
   );
 }
 

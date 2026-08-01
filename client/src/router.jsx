@@ -23,6 +23,7 @@ import Notes from "./pages/Notes/Notes";
 import Goals from "./pages/Goals/Goals";
 import Settings from "./pages/Settings/Settings";
 import Tasks from "./pages/Tasks/Tasks";
+import Pedometer from "./pages/Pedometer/Pedometer";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
               {
   path: "/tasks",
   element: <Tasks />,
+},
+{
+  path: "pedometer",
+  element: <Pedometer />,
 },
             ],
           },

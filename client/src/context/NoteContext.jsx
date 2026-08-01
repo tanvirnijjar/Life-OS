@@ -31,11 +31,21 @@ export function NoteProvider({ children }) {
     );
   };
 
-  const updateNote = (updatedNote) => {
+  const togglePin = (id) => {
     setNotes((prev) =>
       prev.map((note) =>
-        note.id === updatedNote.id
-          ? updatedNote
+        note.id === id
+          ? { ...note, pinned: !note.pinned }
+          : note
+      )
+    );
+  };
+
+  const editNote = (id, updatedNote) => {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === id
+          ? { ...note, ...updatedNote }
           : note
       )
     );
@@ -47,7 +57,8 @@ export function NoteProvider({ children }) {
         notes,
         addNote,
         deleteNote,
-        updateNote,
+        togglePin,
+        editNote,
       }}
     >
       {children}

@@ -42,10 +42,16 @@ const menuItems = [
     icon: <FiUser />,
   },
   {
+  name: "Pedometer",
+  path: "/pedometer",
+  icon: "👣",
+},
+  {
     name: "Settings",
     path: "/settings",
     icon: <FiSettings />,
   },
+  
 ];
 
 function Sidebar() {

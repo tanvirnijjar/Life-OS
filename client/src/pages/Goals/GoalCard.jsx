@@ -1,47 +1,117 @@
+import { useState } from "react";
 import ProgressBar from "./ProgressBar";
 
 function GoalCard({
   goal,
+  editGoal,
   toggleComplete,
   deleteGoal,
 }) {
+  const [editing, setEditing] = useState(false);
+
+  const [title, setTitle] = useState(goal.title);
+  const [priority, setPriority] = useState(goal.priority);
+  const [deadline, setDeadline] = useState(goal.deadline);
+  const [progress, setProgress] = useState(goal.progress);
+
+  const handleSave = () => {
+    editGoal(goal.id, {
+      title,
+      priority,
+      deadline,
+      progress: Number(progress),
+    });
+
+    setEditing(false);
+  };
+
   return (
-    <div
-      className={`goal-card ${
-        goal.completed ? "completed-goal" : ""
-      }`}
-    >
-      <div className="goal-header">
-        <h2>{goal.title}</h2>
+    <div className="goal-card">
+      {editing ? (
+        <>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-        <span
-          className={`priority ${goal.priority.toLowerCase()}`}
-        >
-          {goal.priority}
-        </span>
-      </div>
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+          </select>
 
-      <ProgressBar progress={goal.progress} />
+          <input
+            type="date"
+            value={deadline}
+            onChange={(e) => setDeadline(e.target.value)}
+          />
 
-      <h3>{goal.progress}% Complete</h3>
+          <input
+            type="number"
+            min="0"
+            max="100"
+            value={progress}
+            onChange={(e) => setProgress(e.target.value)}
+          />
 
-      <p>📅 Deadline: {goal.deadline}</p>
+          <ProgressBar progress={progress} />
 
-      <div className="goal-buttons">
-        <button
-          className="complete-btn"
-          onClick={() => toggleComplete(goal.id)}
-        >
-          {goal.completed ? "↩ Reopen" : "✅ Complete"}
-        </button>
+          <div className="goal-buttons">
+            <button onClick={handleSave}>
+              💾 Save
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="goal-top">
+            <h2>{goal.title}</h2>
 
-        <button
-          className="delete-btn"
-          onClick={() => deleteGoal(goal.id)}
-        >
-          🗑 Delete
-        </button>
-      </div>
+            <span
+              className={`priority ${goal.priority.toLowerCase()}`}
+            >
+              {goal.priority}
+            </span>
+          </div>
+
+          <ProgressBar progress={goal.progress} />
+
+          <h3>{goal.progress}% Complete</h3>
+
+          <p>📅 Deadline: {goal.deadline}</p>
+
+          <div className="goal-buttons">
+            <button
+              onClick={() => setEditing(true)}
+            >
+              ✏ Edit
+            </button>
+
+            <button
+              onClick={() =>
+                toggleComplete(goal.id)
+              }
+            >
+              {goal.completed
+                ? "↩ Undo"
+                : "✅ Complete"}
+            </button>
+
+            <button
+              className="delete"
+              onClick={() =>
+                deleteGoal(goal.id)
+              }
+            >
+              🗑 Delete
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

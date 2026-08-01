@@ -13,22 +13,12 @@ function Notes() {
     notes,
     addNote,
     deleteNote,
-    updateNote,
+    togglePin,
+    editNote,
   } = useNotes();
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
-
-  const togglePin = (id) => {
-    const note = notes.find((n) => n.id === id);
-
-    if (!note) return;
-
-    updateNote({
-      ...note,
-      pinned: !note.pinned,
-    });
-  };
 
   const filteredNotes = notes
     .filter((note) =>
@@ -40,7 +30,7 @@ function Notes() {
       if (category === "All") return true;
       return note.category === category;
     })
-    .sort((a, b) => Number(b.pinned) - Number(a.pinned));
+    .sort((a, b) => b.pinned - a.pinned);
 
   return (
     <div className="notes-page">
@@ -70,6 +60,7 @@ function Notes() {
               note={note}
               deleteNote={deleteNote}
               togglePin={togglePin}
+              editNote={editNote}
             />
           ))
         )}

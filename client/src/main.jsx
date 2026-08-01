@@ -11,7 +11,7 @@ import { NoteProvider } from "./context/NoteContext";
 // import { NoteProvider } from "./context/NoteContext";
 
 import "./App.css";
-
+import "./styles/theme.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
  <TaskProvider>
   <GoalProvider>
