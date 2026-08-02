@@ -1,71 +1,149 @@
-# 🌼 Life OS 3.1 Premium UI
+# 🌼 Life OS
 
-A modern productivity dashboard built with React.
+> A modern productivity dashboard built with React.
 
-## 🚀 Live Demo
-
-Add your Vercel link here
-
-Example:
-
-https://life-os-xxxx.vercel.app
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![Firebase](https://img.shields.io/badge/Firebase-Authentication-orange?logo=firebase)
+![Vite](https://img.shields.io/badge/Vite-Frontend-purple?logo=vite)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-## ✨ Features
+# ✨ Overview
 
-- 📊 Beautiful Dashboard
-- ✅ Task Manager
-- 📝 Notes
-- 🎯 Goals
-- 📅 Calendar
-- 👣 Pedometer
-- 👤 Profile
-- ⚙️ Settings
-- 💾 LocalStorage Support
-- 📱 Responsive Design
+Life OS is a modern productivity application that helps users manage daily life in one place.
+
+It includes task management, notes, goals, calendar, profile, settings, dark mode and more.
+
+Built with React, Context API and Firebase Authentication.
 
 ---
 
-## 🛠 Tech Stack
+# 🚀 Features
+
+✅ Firebase Authentication
+
+✅ Dashboard
+
+✅ Task Manager
+
+✅ Notes
+
+✅ Goals
+
+✅ Calendar
+
+✅ Pedometer
+
+✅ Profile
+
+✅ Settings
+
+✅ Dark Mode
+
+✅ Responsive Design
+
+---
+
+# 🛠 Tech Stack
 
 - React
-- JavaScript
-- CSS3
+- Vite
 - React Router
+- Context API
+- Firebase Authentication
 - LocalStorage
-- Vercel
+- CSS3
 
 ---
 
-## 📂 Installation
+# 📸 Screenshots
 
-Clone the repository
+## Landing Page
+
+(Add screenshot here)
+
+---
+
+## Dashboard
+
+(Add screenshot here)
+
+---
+
+## Tasks
+
+(Add screenshot here)
+
+---
+
+## Notes
+
+(Add screenshot here)
+
+---
+
+## Goals
+
+(Add screenshot here)
+
+---
+
+## Calendar
+
+(Add screenshot here)
+
+---
+
+# 📁 Folder Structure
+
+client/
+│
+├── src/
+│ ├── components/
+│ ├── context/
+│ ├── firebase/
+│ ├── hooks/
+│ ├── pages/
+│ ├── services/
+│ └── styles/
+
+---
+
+# 🚀 Installation
 
 ```bash
-git clone https://github.com/tanvirnijjar/Life-OS.git
-```
+git clone https://github.com/yourusername/life-os.git
 
-Install dependencies
+cd life-os
 
-```bash
 npm install
-```
 
-Run project
-
-```bash
 npm run dev
 ```
 
 ---
 
-## 📸 Screenshots
+# 🌙 Dark Mode
 
-Coming Soon...
+Supports Light & Dark themes.
 
 ---
 
-## 👨‍💻 Developer
+# ❤️ Author
 
-Made with ❤️ by **Tanvir Kaur**
+**Tanvir Kaur**
+
+BCA Student
+
+React Developer
+
+Future Full Stack Engineer 🚀
+
+---
+
+# ⭐ Show your support
+
+If you like this project,
+
+give it a ⭐ on GitHub.
