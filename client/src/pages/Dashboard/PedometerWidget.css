@@ -1,0 +1,52 @@
+.pedometer-card{
+    background:#fff;
+    padding:25px;
+    border-radius:22px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.pedometer-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.pedometer-header span{
+    background:#DCFCE7;
+    color:#16A34A;
+    padding:6px 14px;
+    border-radius:25px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.steps-number{
+    font-size:42px;
+    font-weight:700;
+    color:#1E293B;
+    margin-bottom:20px;
+}
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    background:#E2E8F0;
+    border-radius:30px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    border-radius:30px;
+    background:linear-gradient(90deg,#22C55E,#3B82F6);
+    transition:width .6s ease;
+}
+
+.goal-info{
+    margin-top:15px;
+    display:flex;
+    justify-content:space-between;
+    color:#64748B;
+    font-size:14px;
+}

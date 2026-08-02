@@ -33,8 +33,20 @@ function Notes() {
     .sort((a, b) => b.pinned - a.pinned);
 
   return (
-    <div className="notes-page">
-      <h1>📝 Notes</h1>
+  <div className="notes-page">
+
+    {/* Header */}
+    <div className="notes-header">
+      <div>
+        <h1>Notes</h1>
+        <p>
+          Organize your ideas, study notes and important information.
+        </p>
+      </div>
+    </div>
+
+    {/* Controls */}
+    <div className="notes-controls">
 
       <NoteForm addNote={addNote} />
 
@@ -48,25 +60,43 @@ function Notes() {
         setCategory={setCategory}
       />
 
-      <div className="notes-grid">
-        {filteredNotes.length === 0 ? (
-          <p className="empty">
-            No notes found 📒
-          </p>
-        ) : (
-          filteredNotes.map((note) => (
-            <NoteCard
-              key={note.id}
-              note={note}
-              deleteNote={deleteNote}
-              togglePin={togglePin}
-              editNote={editNote}
-            />
-          ))
-        )}
-      </div>
     </div>
-  );
+
+    {/* Notes Grid */}
+    <div className="notes-grid">
+
+      {filteredNotes.length === 0 ? (
+
+        <div className="empty-state">
+
+          <h2>📝 No Notes Yet</h2>
+
+          <p>
+            Create your first note to get started.
+          </p>
+
+        </div>
+
+      ) : (
+
+        filteredNotes.map((note) => (
+
+          <NoteCard
+            key={note.id}
+            note={note}
+            deleteNote={deleteNote}
+            togglePin={togglePin}
+            editNote={editNote}
+          />
+
+        ))
+
+      )}
+
+    </div>
+
+  </div>
+);
 }
 
 export default Notes;

@@ -15,6 +15,8 @@ function GoalCard({
   const [progress, setProgress] = useState(goal.progress);
 
   const handleSave = () => {
+    if (!title.trim()) return;
+
     editGoal(goal.id, {
       title,
       priority,
@@ -26,11 +28,16 @@ function GoalCard({
   };
 
   return (
-    <div className="goal-card">
+    <div
+      className={`goal-card ${
+        goal.completed ? "completed-goal" : ""
+      }`}
+    >
       {editing ? (
         <>
           <input
             type="text"
+            placeholder="Goal Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -54,6 +61,7 @@ function GoalCard({
             type="number"
             min="0"
             max="100"
+            placeholder="Progress %"
             value={progress}
             onChange={(e) => setProgress(e.target.value)}
           />
@@ -61,14 +69,17 @@ function GoalCard({
           <ProgressBar progress={progress} />
 
           <div className="goal-buttons">
-            <button onClick={handleSave}>
+            <button
+              className="complete-btn"
+              onClick={handleSave}
+            >
               💾 Save
             </button>
           </div>
         </>
       ) : (
         <>
-          <div className="goal-top">
+          <div className="goal-header">
             <h2>{goal.title}</h2>
 
             <span
@@ -80,32 +91,37 @@ function GoalCard({
 
           <ProgressBar progress={goal.progress} />
 
-          <h3>{goal.progress}% Complete</h3>
+          <p>
+            <strong>Progress:</strong> {goal.progress}%
+          </p>
 
-          <p>📅 Deadline: {goal.deadline}</p>
+          <p>
+            <strong>Deadline:</strong> {goal.deadline}
+          </p>
+
+          <p>
+            <strong>Status:</strong>{" "}
+            {goal.completed ? "Completed ✅" : "In Progress 🚀"}
+          </p>
 
           <div className="goal-buttons">
             <button
+              className="complete-btn"
               onClick={() => setEditing(true)}
             >
-              ✏ Edit
+              ✏️ Edit
             </button>
 
             <button
-              onClick={() =>
-                toggleComplete(goal.id)
-              }
+              className="complete-btn"
+              onClick={() => toggleComplete(goal.id)}
             >
-              {goal.completed
-                ? "↩ Undo"
-                : "✅ Complete"}
+              {goal.completed ? "↩ Undo" : "✅ Complete"}
             </button>
 
             <button
-              className="delete"
-              onClick={() =>
-                deleteGoal(goal.id)
-              }
+              className="delete-btn"
+              onClick={() => deleteGoal(goal.id)}
             >
               🗑 Delete
             </button>

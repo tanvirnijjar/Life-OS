@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import toast from "react-hot-toast";
 
 const GoalContext = createContext();
 
@@ -24,24 +30,38 @@ export function GoalProvider({ children }) {
         completed: false,
       },
     ]);
+
+    toast.success("🎯 Goal Added Successfully");
   };
 
   const deleteGoal = (id) => {
     setGoals((prev) =>
       prev.filter((goal) => goal.id !== id)
     );
+
+    toast.success("🗑 Goal Deleted");
   };
 
   const toggleComplete = (id) => {
     setGoals((prev) =>
-      prev.map((goal) =>
-        goal.id === id
-          ? {
-              ...goal,
-              completed: !goal.completed,
-            }
-          : goal
-      )
+      prev.map((goal) => {
+        if (goal.id === id) {
+          const updatedGoal = {
+            ...goal,
+            completed: !goal.completed,
+          };
+
+          toast.success(
+            updatedGoal.completed
+              ? "🏆 Goal Completed!"
+              : "📌 Goal Marked In Progress"
+          );
+
+          return updatedGoal;
+        }
+
+        return goal;
+      })
     );
   };
 
@@ -53,6 +73,8 @@ export function GoalProvider({ children }) {
           : goal
       )
     );
+
+    toast.success("✏️ Goal Updated");
   };
 
   return (

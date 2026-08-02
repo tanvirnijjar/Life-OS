@@ -1,3 +1,4 @@
+import "./StatsCards.css";
 function StatsCards({
   totalTasks,
   completedTasks,

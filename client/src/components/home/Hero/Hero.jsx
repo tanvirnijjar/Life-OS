@@ -1,4 +1,5 @@
 import "./Hero.css";
+import { useNavigate } from "react-router-dom";
 import {
   FaArrowRight,
   FaCheckCircle,
@@ -8,6 +9,8 @@ import {
 } from "react-icons/fa";
 
 function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section className="hero">
       <div className="hero-content">
@@ -36,12 +39,18 @@ function Hero() {
 
           <div className="hero-buttons">
 
-            <button className="primary-btn">
+            <button
+              className="primary-btn"
+              onClick={() => navigate("/register")}
+            >
               Get Started
               <FaArrowRight />
             </button>
 
-            <button className="secondary-btn">
+            <button
+              className="secondary-btn"
+              onClick={() => navigate("/dashboard")}
+            >
               Live Demo
             </button>
 

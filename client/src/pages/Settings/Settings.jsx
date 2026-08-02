@@ -1,10 +1,11 @@
-import { useState } from "react";
 import "./Settings.css";
+import { useTheme } from "../../context/ThemeContext";
 
 function Settings() {
-  const [notifications, setNotifications] = useState(true);
-  const [stepGoal, setStepGoal] = useState(10000);
-  const [taskGoal, setTaskGoal] = useState(5);
+  const {
+    darkMode,
+    toggleTheme,
+  } = useTheme();
 
   const clearData = () => {
     if (
@@ -25,38 +26,14 @@ function Settings() {
       <div className="settings-card">
 
         <div className="setting-item">
-          <span>🔔 Notifications</span>
+          <span>
+            {darkMode ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          </span>
 
           <input
             type="checkbox"
-            checked={notifications}
-            onChange={() =>
-              setNotifications(!notifications)
-            }
-          />
-        </div>
-
-        <div className="setting-item">
-          <span>👣 Daily Step Goal</span>
-
-          <input
-            type="number"
-            value={stepGoal}
-            onChange={(e) =>
-              setStepGoal(e.target.value)
-            }
-          />
-        </div>
-
-        <div className="setting-item">
-          <span>🎯 Daily Task Goal</span>
-
-          <input
-            type="number"
-            value={taskGoal}
-            onChange={(e) =>
-              setTaskGoal(e.target.value)
-            }
+            checked={darkMode}
+            onChange={toggleTheme}
           />
         </div>
 
@@ -73,11 +50,13 @@ function Settings() {
 
         <h2>ℹ️ About Life OS</h2>
 
-        <p>Version 3.1 Premium</p>
+        <p>Version 1.1</p>
 
         <p>
           Built with ❤️ using React,
-          Context API and LocalStorage.
+          Context API,
+          React Router and
+          LocalStorage.
         </p>
 
       </div>

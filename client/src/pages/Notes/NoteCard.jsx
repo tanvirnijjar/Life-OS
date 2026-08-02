@@ -11,6 +11,8 @@ function NoteCard({
   const [description, setDescription] = useState(note.description);
 
   const saveEdit = () => {
+    if (!title.trim()) return;
+
     editNote(note.id, {
       title,
       description,
@@ -21,61 +23,72 @@ function NoteCard({
 
   return (
     <div className="note-card">
-
       {editing ? (
         <>
           <input
+            type="text"
             value={title}
-            onChange={(e) =>
-              setTitle(e.target.value)
-            }
+            placeholder="Note title"
+            onChange={(e) => setTitle(e.target.value)}
           />
 
           <textarea
             value={description}
-            onChange={(e) =>
-              setDescription(e.target.value)
-            }
+            placeholder="Write your note..."
+            onChange={(e) => setDescription(e.target.value)}
           />
+
+          <div className="note-footer">
+            <span className="note-category">
+              {note.category}
+            </span>
+
+            <div className="note-actions">
+              <button
+                className="pin-btn"
+                onClick={saveEdit}
+              >
+                💾 Save
+              </button>
+            </div>
+          </div>
         </>
       ) : (
         <>
-          <h3>{note.title}</h3>
+          <h2>{note.title}</h2>
+
           <p>{note.description}</p>
+
+          <div className="note-footer">
+            <span className="note-category">
+              {note.category}
+            </span>
+
+            <div className="note-actions">
+              <button
+                className="pin-btn"
+                onClick={() => togglePin(note.id)}
+              >
+                {note.pinned ? "📌 Pinned" : "📍 Pin"}
+              </button>
+
+              <button
+                className="pin-btn"
+                onClick={() => setEditing(true)}
+              >
+                ✏️ Edit
+              </button>
+
+              <button
+                className="delete-btn"
+                onClick={() => deleteNote(note.id)}
+              >
+                🗑 Delete
+              </button>
+            </div>
+          </div>
         </>
       )}
-
-      <small>{note.category}</small>
-
-      <div className="note-buttons">
-
-        {editing ? (
-          <button onClick={saveEdit}>
-            💾 Save
-          </button>
-        ) : (
-          <button
-            onClick={() => setEditing(true)}
-          >
-            ✏️ Edit
-          </button>
-        )}
-
-        <button
-          onClick={() => togglePin(note.id)}
-        >
-          📌
-        </button>
-
-        <button
-          className="delete"
-          onClick={() => deleteNote(note.id)}
-        >
-          🗑 Delete
-        </button>
-
-      </div>
-
     </div>
   );
 }

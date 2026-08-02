@@ -1,16 +1,22 @@
 import "./Dashboard.css";
+
 import { useTasks } from "../../context/TaskContext";
 
 import WelcomeCard from "./WelcomeCard";
 import StatsCards from "./StatsCards";
+
 import RecentTasks from "./RecentTasks";
 import ProgressCard from "./ProgressCard";
-import QuickActions from "./QuickActions";
-import ActiveGoals from "./ActiveGoals";
+
 import RecentNotes from "./RecentNotes";
-import UpcomingDeadlines from "./UpcomingDeadlines";
 import OverviewCard from "./OverviewCard";
+import ActiveGoals from "./ActiveGoals";
+
 import PedometerWidget from "./PedometerWidget";
+import QuickActions from "./QuickActions";
+import UpcomingDeadlines from "./UpcomingDeadlines";
+
+import QuoteCard from "./QuoteCard";
 
 function Dashboard() {
   const { tasks } = useTasks();
@@ -26,10 +32,13 @@ function Dashboard() {
   const productivity =
     totalTasks === 0
       ? 0
-      : Math.round((completedTasks / totalTasks) * 100);
+      : Math.round(
+          (completedTasks / totalTasks) * 100
+        );
 
   return (
     <div className="dashboard">
+
       <WelcomeCard />
 
       <StatsCards
@@ -39,27 +48,56 @@ function Dashboard() {
         productivity={productivity}
       />
 
-      <div className="dashboard-grid">
-        <RecentTasks tasks={tasks} />
+      {/* ================= ROW 1 ================= */}
 
-        <ProgressCard
-          totalTasks={totalTasks}
-          completedTasks={completedTasks}
-          productivity={productivity}
-        />
+      <div className="dashboard-row row1">
 
-        <ActiveGoals />
+        <div className="recent-tasks">
+          <RecentTasks tasks={tasks} />
+        </div>
+
+        <div className="progress">
+          <ProgressCard
+            totalTasks={totalTasks}
+            completedTasks={completedTasks}
+            productivity={productivity}
+          />
+        </div>
+
+      </div>
+
+      {/* ================= ROW 2 ================= */}
+
+      <div className="dashboard-row row2">
 
         <RecentNotes />
 
-        <UpcomingDeadlines />
-
         <OverviewCard />
 
-        <PedometerWidget />
+        <ActiveGoals />
+
       </div>
 
-      <QuickActions />
+      {/* ================= ROW 3 ================= */}
+
+      <div className="dashboard-row row3">
+
+        <PedometerWidget />
+
+        <QuickActions />
+
+        <UpcomingDeadlines />
+
+      </div>
+
+      {/* ================= ROW 4 ================= */}
+
+      <div className="dashboard-row row4">
+
+        <QuoteCard />
+
+      </div>
+
     </div>
   );
 }

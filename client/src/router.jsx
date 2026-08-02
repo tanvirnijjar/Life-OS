@@ -24,6 +24,7 @@ import Goals from "./pages/Goals/Goals";
 import Settings from "./pages/Settings/Settings";
 import Tasks from "./pages/Tasks/Tasks";
 import Pedometer from "./pages/Pedometer/Pedometer";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
 
-      // Protected Dashboard Routes
+      // Protected Routes
       {
         element: <ProtectedRoute />,
         children: [
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
               {
                 path: "dashboard",
                 element: <Dashboard />,
+              },
+              {
+                path: "tasks",
+                element: <Tasks />,
               },
               {
                 path: "calendar",
@@ -73,17 +78,13 @@ const router = createBrowserRouter([
                 element: <Profile />,
               },
               {
+                path: "pedometer",
+                element: <Pedometer />,
+              },
+              {
                 path: "settings",
                 element: <Settings />,
               },
-              {
-  path: "/tasks",
-  element: <Tasks />,
-},
-{
-  path: "pedometer",
-  element: <Pedometer />,
-},
             ],
           },
         ],

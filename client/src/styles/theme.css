@@ -1,31 +1,51 @@
-:root {
-  /* Colors */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-card: rgba(30, 41, 59, 0.85);
+/* ==========================
+   LIGHT THEME
+========================== */
 
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --secondary: #38bdf8;
+.light-theme{
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --text:#111827;
+  --secondary:#64748b;
+  --border:#e2e8f0;
+  --primary:#2563eb;
+}
 
-  --text-primary: #ffffff;
-  --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
+/* ==========================
+   DARK THEME
+========================== */
 
-  --success: #22c55e;
-  --warning: #facc15;
-  --danger: #ef4444;
+.dark-theme{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#f8fafc;
+  --secondary:#94a3b8;
+  --border:#334155;
+  --primary:#3b82f6;
+}
 
-  /* Shadows */
-  --shadow-sm: 0 8px 20px rgba(0,0,0,.15);
-  --shadow-md: 0 15px 35px rgba(0,0,0,.25);
-  --shadow-lg: 0 25px 60px rgba(0,0,0,.35);
+/* ==========================
+   GLOBAL
+========================== */
 
-  /* Radius */
-  --radius-sm: 12px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  /* Animation */
-  --transition: .3s ease;
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,sans-serif;
+  transition:.3s;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font-family:inherit;
 }

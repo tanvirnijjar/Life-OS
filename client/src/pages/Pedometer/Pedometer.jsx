@@ -7,14 +7,14 @@ function Pedometer() {
     return saved ? Number(saved) : 0;
   });
 
-  const goal = 10000;
+  const dailyGoal = 10000;
 
   useEffect(() => {
     localStorage.setItem("lifeos_steps", steps);
   }, [steps]);
 
   const progress = Math.min(
-    Math.round((steps / goal) * 100),
+    Math.round((steps / dailyGoal) * 100),
     100
   );
 
@@ -24,13 +24,42 @@ function Pedometer() {
 
   return (
     <div className="pedometer-page">
-      <h1>👣 Pedometer</h1>
+
+      {/* Header */}
+
+      <div className="pedometer-header">
+        <h1>Pedometer</h1>
+        <p>
+          Track your daily steps and stay active every day.
+        </p>
+      </div>
+
+      {/* Summary */}
+
+      <div className="pedometer-summary">
+
+        <div className="summary-card">
+          <h2>{steps.toLocaleString()}</h2>
+          <p>Total Steps</p>
+        </div>
+
+        <div className="summary-card">
+          <h2>{progress}%</h2>
+          <p>Goal Completed</p>
+        </div>
+
+        <div className="summary-card">
+          <h2>{calories}</h2>
+          <p>Calories Burned</p>
+        </div>
+
+      </div>
+
+      {/* Main Card */}
 
       <div className="pedometer-card">
 
-        <h2>{steps.toLocaleString()}</h2>
-
-        <p>Today's Steps</p>
+        <h2>{steps.toLocaleString()} Steps</h2>
 
         <div className="progress-container">
           <div
@@ -41,13 +70,13 @@ function Pedometer() {
           />
         </div>
 
-        <h3>{progress}% of Daily Goal</h3>
+        <h3>{progress}% of {dailyGoal.toLocaleString()} Steps</h3>
 
         <div className="stats">
 
           <div className="stat-box">
-            <h4>🎯 Goal</h4>
-            <p>{goal.toLocaleString()}</p>
+            <h4>🎯 Daily Goal</h4>
+            <p>{dailyGoal.toLocaleString()}</p>
           </div>
 
           <div className="stat-box">
@@ -86,6 +115,7 @@ function Pedometer() {
         </div>
 
       </div>
+
     </div>
   );
 }

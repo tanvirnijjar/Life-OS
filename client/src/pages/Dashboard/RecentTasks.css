@@ -1,0 +1,87 @@
+.recent-card{
+    background:#fff;
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+}
+
+.recent-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.recent-header span{
+    background:#EEF2FF;
+    color:#2563EB;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+.task-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.task-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    border-radius:16px;
+    background:#F8FAFC;
+    transition:.3s;
+}
+
+.task-item:hover{
+    transform:translateX(6px);
+    background:#EFF6FF;
+}
+
+.task-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.priority{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+}
+
+.priority.high{
+    background:#EF4444;
+}
+
+.priority.medium{
+    background:#F59E0B;
+}
+
+.priority.low{
+    background:#22C55E;
+}
+
+.task-item h4{
+    margin:0;
+    font-size:16px;
+}
+
+.task-item small{
+    color:#64748B;
+}
+
+.priority-text{
+    font-size:13px;
+    font-weight:600;
+    color:#475569;
+}
+
+.empty-state{
+    text-align:center;
+    padding:40px 20px;
+}

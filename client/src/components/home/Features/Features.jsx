@@ -49,7 +49,7 @@ function Features() {
   ];
 
   return (
-    <section className="features">
+    <section id="features" className="features">
 
       <div className="features-heading">
 
@@ -58,8 +58,8 @@ function Features() {
         <h2>Everything You Need In One Place</h2>
 
         <p>
-          Stay productive with powerful tools designed to organize your
-          work and your personal life.
+          Stay productive with powerful tools designed to organize
+          your work and personal life.
         </p>
 
       </div>
@@ -67,7 +67,6 @@ function Features() {
       <div className="features-grid">
 
         {features.map((feature, index) => (
-
           <div className="feature-card" key={index}>
 
             <div className="feature-icon">
@@ -79,7 +78,6 @@ function Features() {
             <p>{feature.description}</p>
 
           </div>
-
         ))}
 
       </div>

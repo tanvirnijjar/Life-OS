@@ -1,5 +1,6 @@
 import { useTasks } from "../../context/TaskContext";
 import { useGoals } from "../../context/GoalContext";
+import "./UpcomingDeadlines.css";
 
 function UpcomingDeadlines() {
   const { tasks } = useTasks();
@@ -28,23 +29,36 @@ function UpcomingDeadlines() {
     .slice(0, 5);
 
   return (
-    <div className="section-card">
-      <h2>📅 Upcoming Deadlines</h2>
+    <div className="deadline-card">
+      <div className="deadline-header">
+        <h2>📅 Upcoming Deadlines</h2>
+        <span>{upcoming.length} Upcoming</span>
+      </div>
 
       {upcoming.length === 0 ? (
-        <p>No upcoming deadlines 🎉</p>
+        <div className="empty-deadline">
+          <h3>🎉 You're all caught up!</h3>
+          <p>No upcoming deadlines.</p>
+        </div>
       ) : (
-        <ul>
+        <div className="deadline-list">
           {upcoming.map((item) => (
-            <li key={item.id}>
-              <strong>{item.title}</strong>
-              <br />
-              <small>
-                {item.type} • 📅 {item.date}
-              </small>
-            </li>
+            <div className="deadline-item" key={item.id}>
+              <div className="deadline-icon">
+                {item.type === "Task" ? "📋" : "🎯"}
+              </div>
+
+              <div className="deadline-info">
+                <h3>{item.title}</h3>
+                <p>{item.type}</p>
+              </div>
+
+              <div className="deadline-date">
+                📅 {item.date}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

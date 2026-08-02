@@ -4,6 +4,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import toast from "react-hot-toast";
 
 const TaskContext = createContext();
 
@@ -29,18 +30,30 @@ export function TaskProvider({ children }) {
         completed: false,
       },
     ]);
+
+    toast.success("✅ Task Added Successfully");
   };
 
   const toggleTask = (id) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              completed: !task.completed,
-            }
-          : task
-      )
+      prev.map((task) => {
+        if (task.id === id) {
+          const updatedTask = {
+            ...task,
+            completed: !task.completed,
+          };
+
+          toast.success(
+            updatedTask.completed
+              ? "🎉 Task Completed!"
+              : "📌 Task Marked Pending"
+          );
+
+          return updatedTask;
+        }
+
+        return task;
+      })
     );
   };
 
@@ -48,6 +61,8 @@ export function TaskProvider({ children }) {
     setTasks((prev) =>
       prev.filter((task) => task.id !== id)
     );
+
+    toast.success("🗑 Task Deleted");
   };
 
   const updateTask = (id, newText) => {
@@ -61,6 +76,8 @@ export function TaskProvider({ children }) {
           : task
       )
     );
+
+    toast.success("✏️ Task Updated");
   };
 
   return (

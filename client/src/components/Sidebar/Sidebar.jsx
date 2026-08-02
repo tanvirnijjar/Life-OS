@@ -42,28 +42,25 @@ const menuItems = [
     icon: <FiUser />,
   },
   {
-  name: "Pedometer",
-  path: "/pedometer",
-  icon: "👣",
-},
+    name: "Pedometer",
+    path: "/pedometer",
+    icon: "👣",
+  },
   {
     name: "Settings",
     path: "/settings",
     icon: <FiSettings />,
   },
-  
 ];
 
 function Sidebar() {
   return (
     <aside className="sidebar">
-      {/* Logo */}
       <div className="sidebar-logo">
         <h2>🌼 Life OS</h2>
         <p>Your Productivity Hub</p>
       </div>
 
-      {/* Navigation */}
       <nav className="sidebar-menu">
         {menuItems.map((item) => (
           <NavLink
@@ -79,7 +76,6 @@ function Sidebar() {
         ))}
       </nav>
 
-      {/* Footer */}
       <div className="sidebar-footer">
         <small>🌼 Life OS 3.0</small>
         <p>Stay Focused • Stay Consistent 🚀</p>

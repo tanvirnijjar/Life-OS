@@ -1,30 +1,48 @@
+import "./RecentTasks.css";
+
 function RecentTasks({ tasks }) {
   const recentTasks = tasks
     .filter((task) => !task.completed)
     .slice(0, 5);
 
   return (
-    <div className="section-card">
-      <h2>🔥 Recent Tasks</h2>
+    <div className="recent-card">
+      <div className="recent-header">
+        <h2>🔥 Today's Tasks</h2>
+        <span>{recentTasks.length} Pending</span>
+      </div>
 
       {recentTasks.length === 0 ? (
-        <p>🎉 No pending tasks!</p>
+        <div className="empty-state">
+          <h3>🎉 Awesome!</h3>
+          <p>You have completed all your tasks.</p>
+        </div>
       ) : (
-        <ul>
+        <div className="task-list">
           {recentTasks.map((task) => (
-            <li key={task.id}>
-              {task.priority === "High" && "🔴 "}
-              {task.priority === "Medium" && "🟡 "}
-              {task.priority === "Low" && "🟢 "}
+            <div className="task-item" key={task.id}>
+              <div className="task-left">
+                <div
+                  className={`priority ${
+                    task.priority?.toLowerCase() || "low"
+                  }`}
+                ></div>
 
-              {task.text}
+                <div>
+                  <h4>{task.text}</h4>
 
-              {task.dueDate && (
-                <small> (📅 {task.dueDate})</small>
-              )}
-            </li>
+                  {task.dueDate && (
+                    <small>📅 {task.dueDate}</small>
+                  )}
+                </div>
+              </div>
+
+              <span className="priority-text">
+                {task.priority}
+              </span>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

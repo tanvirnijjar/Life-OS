@@ -31,8 +31,16 @@ function Tasks() {
     });
 
   return (
-    <div className="tasks-page">
-      <h1>✅ Task Manager</h1>
+  <div className="tasks-page">
+
+    <div className="tasks-header">
+      <div>
+        <h1>Task Manager</h1>
+        <p>Manage your daily tasks and stay productive.</p>
+      </div>
+    </div>
+
+    <div className="task-controls">
 
       <TaskForm addTask={addTask} />
 
@@ -46,25 +54,37 @@ function Tasks() {
         setFilter={setFilter}
       />
 
-      <div className="task-list">
-        {filteredTasks.length === 0 ? (
-          <p className="empty">
-            No matching tasks found 🚀
-          </p>
-        ) : (
-          filteredTasks.map((task) => (
-            <TaskCard
-              key={task.id}
-              task={task}
-              toggleTask={toggleTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-            />
-          ))
-        )}
-      </div>
     </div>
-  );
+
+    <div className="task-list">
+
+      {filteredTasks.length === 0 ? (
+
+        <div className="empty-state">
+          <h2>🎉 No Tasks Found</h2>
+          <p>
+            Add a new task or change the filter.
+          </p>
+        </div>
+
+      ) : (
+
+        filteredTasks.map((task) => (
+          <TaskCard
+            key={task.id}
+            task={task}
+            toggleTask={toggleTask}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+          />
+        ))
+
+      )}
+
+    </div>
+
+  </div>
+);
 }
 
 export default Tasks;

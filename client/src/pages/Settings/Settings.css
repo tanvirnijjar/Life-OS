@@ -1,236 +1,180 @@
 /* ===================================================
-   LIFE OS 3.1 PREMIUM - SETTINGS
+                LIFE OS - SETTINGS
 =================================================== */
 
 .settings-page{
-  min-height:100vh;
-  padding:40px;
-  background:linear-gradient(135deg,#0f172a,#111827);
-  color:white;
+    min-height:100vh;
+    background:#F8FAFC;
+    padding:30px;
 }
 
-.settings-page h1{
-  font-size:38px;
-  margin-bottom:35px;
-  font-weight:700;
+/* ===================================
+            HEADER
+=================================== */
+
+.settings-header{
+    margin-bottom:30px;
 }
 
-/* ===========================
-   Cards
-=========================== */
-
-.settings-card,
-.about-card{
-
-background:rgba(30,41,59,.92);
-
-backdrop-filter:blur(14px);
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:22px;
-
-padding:30px;
-
-margin-bottom:25px;
-
-box-shadow:0 15px 35px rgba(0,0,0,.22);
-
-transition:.35s ease;
-
+.settings-header h1{
+    font-size:34px;
+    font-weight:700;
+    color:#1E293B;
 }
 
-.settings-card:hover,
-.about-card:hover{
-
-transform:translateY(-6px);
-
-box-shadow:0 22px 45px rgba(37,99,235,.22);
-
+.settings-header p{
+    margin-top:8px;
+    color:#64748B;
+    font-size:16px;
 }
 
-/* ===========================
-   Setting Item
-=========================== */
+/* ===================================
+            SETTINGS CARD
+=================================== */
+
+.settings-card{
+    background:#FFFFFF;
+    border-radius:22px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 12px 30px rgba(15,23,42,.08);
+}
 
 .setting-item{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-gap:20px;
-
-padding:20px 0;
-
-border-bottom:1px solid rgba(255,255,255,.08);
-
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:22px 0;
+    border-bottom:1px solid #E2E8F0;
 }
 
 .setting-item:last-child{
-
-border-bottom:none;
-
+    border-bottom:none;
 }
 
-.setting-item span{
-
-font-size:16px;
-
-font-weight:500;
-
-color:#ffffff;
-
+.setting-item h3{
+    font-size:18px;
+    color:#1E293B;
+    margin-bottom:6px;
 }
 
-/* ===========================
-   Inputs
-=========================== */
+.setting-item p{
+    color:#64748B;
+    font-size:14px;
+}
 
 .setting-item input[type="number"]{
-
-width:140px;
-
-padding:12px;
-
-background:#334155;
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:12px;
-
-color:white;
-
-font-size:15px;
-
-outline:none;
-
-transition:.3s;
-
+    width:140px;
+    padding:12px;
+    border:1px solid #CBD5E1;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
 }
 
 .setting-item input[type="number"]:focus{
-
-border-color:#2563eb;
-
-box-shadow:0 0 0 3px rgba(37,99,235,.25);
-
+    border-color:#2563EB;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
 }
 
 .setting-item input[type="checkbox"]{
-
-width:22px;
-
-height:22px;
-
-cursor:pointer;
-
-accent-color:#2563eb;
-
+    width:22px;
+    height:22px;
+    cursor:pointer;
+    accent-color:#2563EB;
 }
 
-/* ===========================
-   Danger Button
-=========================== */
+/* ===================================
+            BUTTON
+=================================== */
 
 .danger-btn{
-
-margin-top:30px;
-
-width:100%;
-
-padding:15px;
-
-border:none;
-
-border-radius:14px;
-
-background:#dc2626;
-
-color:white;
-
-font-size:16px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.3s;
-
+    width:100%;
+    margin-top:30px;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:#EF4444;
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
 }
 
 .danger-btn:hover{
-
-background:#b91c1c;
-
-transform:translateY(-3px);
-
+    background:#DC2626;
+    transform:translateY(-2px);
 }
 
-/* ===========================
-   About Card
-=========================== */
+/* ===================================
+            ABOUT
+=================================== */
+
+.about-card{
+    background:#FFFFFF;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 12px 30px rgba(15,23,42,.08);
+}
 
 .about-card h2{
-
-margin-bottom:18px;
-
-font-size:24px;
-
+    color:#1E293B;
+    margin-bottom:18px;
 }
 
 .about-card p{
+    color:#64748B;
+    line-height:1.8;
+    margin-bottom:12px;
+}
 
-margin-bottom:12px;
+/* ===================================
+            ANIMATION
+=================================== */
 
-line-height:1.7;
+.settings-card,
+.about-card{
+    animation:fadeUp .35s ease;
+}
 
-color:#cbd5e1;
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
 
 }
 
-/* ===========================
-   Responsive
-=========================== */
-
-@media(max-width:992px){
-
-.settings-page{
-
-padding:30px;
-
-}
-
-}
+/* ===================================
+            RESPONSIVE
+=================================== */
 
 @media(max-width:768px){
 
 .settings-page{
-
 padding:20px;
-
 }
 
-.settings-page h1{
-
-font-size:30px;
-
+.settings-header h1{
+font-size:28px;
 }
 
 .setting-item{
-
 flex-direction:column;
-
 align-items:flex-start;
-
 }
 
 .setting-item input[type="number"]{
-
 width:100%;
-
 }
 
 }

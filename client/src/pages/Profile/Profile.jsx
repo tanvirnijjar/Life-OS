@@ -13,6 +13,8 @@ function Profile() {
     (task) => task.completed
   ).length;
 
+  const pendingTasks = totalTasks - completedTasks;
+
   const totalNotes = notes.length;
 
   const productivity =
@@ -25,17 +27,25 @@ function Profile() {
   return (
     <div className="profile-page">
 
-      <div className="profile-card">
+      {/* Header */}
+
+      <div className="profile-header">
 
         <div className="profile-avatar">
           👤
         </div>
 
-        <h1>Tanvir Kaur</h1>
+        <div className="profile-info">
+          <h1>Tanvir Kaur</h1>
 
-        <p>BCA Student • Full Stack Developer</p>
+          <p>BCA Student • Full Stack Developer</p>
+
+          <span>🚀 Building Life OS v1.0</span>
+        </div>
 
       </div>
+
+      {/* Stats */}
 
       <div className="profile-stats">
 
@@ -50,6 +60,11 @@ function Profile() {
         </div>
 
         <div className="profile-box">
+          <h2>{pendingTasks}</h2>
+          <p>Pending</p>
+        </div>
+
+        <div className="profile-box">
           <h2>{totalNotes}</h2>
           <p>Notes</p>
         </div>
@@ -60,6 +75,8 @@ function Profile() {
         </div>
 
       </div>
+
+      {/* Achievements */}
 
       <div className="profile-achievements">
 
@@ -83,7 +100,30 @@ function Profile() {
             📝 Notes Creator
           </div>
 
+          <div className="achievement">
+            🔥 Productivity Hero
+          </div>
+
+          <div className="achievement">
+            💻 React Developer
+          </div>
+
         </div>
+
+      </div>
+
+      {/* About */}
+
+      <div className="profile-about">
+
+        <h2>About</h2>
+
+        <p>
+          Passionate BCA student focused on Full Stack Development,
+          React, Firebase and building modern productivity
+          applications. Currently developing Life OS as a complete
+          personal productivity platform.
+        </p>
 
       </div>
 
