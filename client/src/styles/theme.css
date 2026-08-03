@@ -1,32 +1,71 @@
-/* ==========================
-   LIGHT THEME
-========================== */
+/* =====================================================
+                    LIGHT THEME
+===================================================== */
 
 .light-theme{
-  --bg:#f8fafc;
-  --card:#ffffff;
+  --bg:#F8FAFC;
+  --card:#FFFFFF;
   --text:#111827;
-  --secondary:#64748b;
-  --border:#e2e8f0;
-  --primary:#2563eb;
+  --secondary:#64748B;
+  --border:#E2E8F0;
+  --primary:#2563EB;
 }
 
-/* ==========================
-   DARK THEME
-========================== */
+/* =====================================================
+                    DARK THEME
+===================================================== */
 
 .dark-theme{
-  --bg:#0f172a;
-  --card:#1e293b;
-  --text:#f8fafc;
-  --secondary:#94a3b8;
+  --bg:#0F172A;
+  --card:#1E293B;
+  --text:#F8FAFC;
+  --secondary:#94A3B8;
   --border:#334155;
-  --primary:#3b82f6;
+  --primary:#3B82F6;
 }
 
-/* ==========================
-   GLOBAL
-========================== */
+/* =====================================================
+                    BLUE THEME
+===================================================== */
+
+.blue-theme{
+  --bg:#0B1120;
+  --card:#172554;
+  --text:#F8FAFC;
+  --secondary:#BFDBFE;
+  --border:#1D4ED8;
+  --primary:#60A5FA;
+}
+
+/* =====================================================
+                    GREEN THEME
+===================================================== */
+
+.green-theme{
+  --bg:#052E16;
+  --card:#14532D;
+  --text:#F0FDF4;
+  --secondary:#BBF7D0;
+  --border:#15803D;
+  --primary:#22C55E;
+}
+
+/* =====================================================
+                    PURPLE THEME
+===================================================== */
+
+.purple-theme{
+  --bg:#2E1065;
+  --card:#581C87;
+  --text:#FAF5FF;
+  --secondary:#DDD6FE;
+  --border:#7E22CE;
+  --primary:#A855F7;
+}
+
+/* =====================================================
+                    GLOBAL
+===================================================== */
 
 *{
   margin:0;
@@ -34,11 +73,18 @@
   box-sizing:border-box;
 }
 
+html,
+body{
+  min-height:100%;
+}
+
 body{
   background:var(--bg);
   color:var(--text);
   font-family:Inter,sans-serif;
-  transition:.3s;
+  transition:
+    background-color .35s ease,
+    color .35s ease;
 }
 
 a{
@@ -48,4 +94,5 @@ a{
 
 button{
   font-family:inherit;
+  cursor:pointer;
 }

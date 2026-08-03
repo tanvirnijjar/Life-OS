@@ -1,32 +1,72 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* =====================================================
+                    GLOBAL RESET
+===================================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
 html,
 body,
-#root {
-  height: 100%;
+#root{
+  height:100%;
 }
 
-body {
-  font-family: "Poppins", sans-serif;
-  background: #0f172a;
+/* =====================================================
+                    BODY
+===================================================== */
+
+body{
+  font-family:"Poppins",sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:
+    background-color .35s ease,
+    color .35s ease;
 }
 
-.app {
-  display: flex;
-  min-height: 100vh;
+/* =====================================================
+                    APP LAYOUT
+===================================================== */
+
+.app{
+  display:flex;
+  min-height:100vh;
+  background:var(--bg);
 }
 
-.main-content {
-  flex: 1;
-  min-height: 100vh;
-  padding: 30px;
-  overflow-y: auto;
+.main-content{
+  flex:1;
+  min-height:100vh;
+  padding:30px;
+  overflow-y:auto;
+  background:var(--bg);
+  color:var(--text);
 }
 
-main {
-  overflow-x: hidden;
+main{
+  overflow-x:hidden;
+}
+
+/* =====================================================
+                    SCROLLBAR
+===================================================== */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:var(--bg);
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--primary);
+  border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  opacity:.8;
 }

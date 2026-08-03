@@ -2,10 +2,7 @@ import "./Settings.css";
 import { useTheme } from "../../context/ThemeContext";
 
 function Settings() {
-  const {
-    darkMode,
-    toggleTheme,
-  } = useTheme();
+  const { theme, changeTheme } = useTheme();
 
   const clearData = () => {
     if (
@@ -20,21 +17,46 @@ function Settings() {
 
   return (
     <div className="settings-page">
-
       <h1>⚙️ Settings</h1>
 
       <div className="settings-card">
+        <h2>🎨 Choose Theme</h2>
 
-        <div className="setting-item">
-          <span>
-            {darkMode ? "🌙 Dark Mode" : "☀️ Light Mode"}
-          </span>
+        <div className="theme-options">
+          <button
+            className={theme === "dark" ? "theme-btn active" : "theme-btn"}
+            onClick={() => changeTheme("dark")}
+          >
+            🌙 Dark
+          </button>
 
-          <input
-            type="checkbox"
-            checked={darkMode}
-            onChange={toggleTheme}
-          />
+          <button
+            className={theme === "light" ? "theme-btn active" : "theme-btn"}
+            onClick={() => changeTheme("light")}
+          >
+            ☀️ Light
+          </button>
+
+          <button
+            className={theme === "blue" ? "theme-btn active" : "theme-btn"}
+            onClick={() => changeTheme("blue")}
+          >
+            🌌 Blue
+          </button>
+
+          <button
+            className={theme === "green" ? "theme-btn active" : "theme-btn"}
+            onClick={() => changeTheme("green")}
+          >
+            🌿 Green
+          </button>
+
+          <button
+            className={theme === "purple" ? "theme-btn active" : "theme-btn"}
+            onClick={() => changeTheme("purple")}
+          >
+            💜 Purple
+          </button>
         </div>
 
         <button
@@ -43,11 +65,9 @@ function Settings() {
         >
           🗑 Clear All Local Data
         </button>
-
       </div>
 
       <div className="about-card">
-
         <h2>ℹ️ About Life OS</h2>
 
         <p>Version 1.1</p>
@@ -58,9 +78,7 @@ function Settings() {
           React Router and
           LocalStorage.
         </p>
-
       </div>
-
     </div>
   );
 }

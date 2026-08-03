@@ -3,31 +3,35 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem("lifeos_theme");
-    return savedTheme === "dark";
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("lifeos_theme") || "dark";
   });
 
   useEffect(() => {
-    localStorage.setItem(
-      "lifeos_theme",
-      darkMode ? "dark" : "light"
+    localStorage.setItem("lifeos_theme", theme);
+
+    // Remove old theme classes
+    document.body.classList.remove(
+      "dark-theme",
+      "light-theme",
+      "blue-theme",
+      "green-theme",
+      "purple-theme"
     );
 
-    document.body.className = darkMode
-      ? "dark-theme"
-      : "light-theme";
-  }, [darkMode]);
+    // Add selected theme class
+    document.body.classList.add(`${theme}-theme`);
+  }, [theme]);
 
-  const toggleTheme = () => {
-    setDarkMode((prev) => !prev);
+  const changeTheme = (newTheme) => {
+    setTheme(newTheme);
   };
 
   return (
     <ThemeContext.Provider
       value={{
-        darkMode,
-        toggleTheme,
+        theme,
+        changeTheme,
       }}
     >
       {children}

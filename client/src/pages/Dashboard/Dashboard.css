@@ -1,133 +1,135 @@
 /* =========================================
-   LIFE OS DASHBOARD
+            LIFE OS DASHBOARD
 ========================================= */
 
-.dashboard {
-  width: 100%;
-  min-height: 100vh;
-  background: #f8fafc;
-  padding: 30px;
+.dashboard{
+  width:100%;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  padding:30px;
+  transition:background .3s ease,color .3s ease;
 }
 
-.dashboard > *:not(:last-child) {
-  margin-bottom: 24px;
+.dashboard > *:not(:last-child){
+  margin-bottom:24px;
 }
 
 /* =========================================
-   ROWS
+                ROWS
 ========================================= */
 
-.dashboard-row {
-  display: grid;
-  gap: 24px;
-  align-items: start;
+.dashboard-row{
+  display:grid;
+  gap:24px;
+  align-items:start;
 }
 
 /* ================= ROW 1 ================= */
 
-.row1 {
-  grid-template-columns: 2fr 1fr;
+.row1{
+  grid-template-columns:2fr 1fr;
 }
 
 /* ================= ROW 2 ================= */
 
-.row2 {
-  grid-template-columns: repeat(3, 1fr);
+.row2{
+  grid-template-columns:repeat(3,1fr);
 }
 
 /* ================= ROW 3 ================= */
 
-.row3 {
-  grid-template-columns: repeat(3, 1fr);
+.row3{
+  grid-template-columns:repeat(3,1fr);
 }
 
 /* ================= ROW 4 ================= */
 
-.row4 {
-  grid-template-columns: 1fr;
+.row4{
+  grid-template-columns:1fr;
 }
 
 /* =========================================
-   CARD WRAPPERS
+            CARD WRAPPERS
 ========================================= */
 
 .recent-tasks,
-.progress {
-  width: 100%;
+.progress{
+  width:100%;
 }
 
 /* =========================================
-   MAKE COMPONENTS FILL THEIR GRID CELL
+        GRID ITEMS FILL SPACE
 ========================================= */
 
 .row1 > *,
 .row2 > *,
 .row3 > *,
-.row4 > * {
-  width: 100%;
+.row4 > *{
+  width:100%;
 }
 
 /* =========================================
-   OPTIONAL CARD HEIGHTS
+            OPTIONAL HEIGHTS
 ========================================= */
 
-.recent-tasks {
-  min-height: 360px;
+.recent-tasks{
+  min-height:360px;
 }
 
-.progress {
-  min-height: 360px;
+.progress{
+  min-height:360px;
 }
 
 /* =========================================
-   ANIMATION
+            ANIMATION
 ========================================= */
 
-.dashboard {
-  animation: fadeIn 0.4s ease;
+.dashboard{
+  animation:fadeIn .4s ease;
 }
 
-@keyframes fadeIn {
+@keyframes fadeIn{
 
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+from{
+opacity:0;
+transform:translateY(15px);
 }
 
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 1100px) {
-
-  .row1,
-  .row2,
-  .row3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
+to{
+opacity:1;
+transform:translateY(0);
+}
 
 }
 
 /* =========================================
-   MOBILE
+            TABLET
 ========================================= */
 
-@media (max-width: 768px) {
+@media(max-width:1100px){
 
-  .dashboard {
-    padding: 18px;
-  }
+.row1,
+.row2,
+.row3{
+grid-template-columns:repeat(2,1fr);
+}
 
-  .dashboard-row {
-    grid-template-columns: 1fr !important;
-    gap: 18px;
-  }
+}
+
+/* =========================================
+            MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+.dashboard{
+padding:18px;
+}
+
+.dashboard-row{
+grid-template-columns:1fr !important;
+gap:18px;
+}
 
 }

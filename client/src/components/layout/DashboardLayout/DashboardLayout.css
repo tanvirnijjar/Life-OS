@@ -1,23 +1,91 @@
-.dashboard-layout {
-  display: flex;
-  min-height: 100vh;
-  background: #f5f7fb;
-}
-
-.dashboard-content {
-  flex: 1;
-  padding: 30px;
-  overflow-y: auto;
-}
-
-@media (max-width:768px){
+/* ===================================================
+            LIFE OS - DASHBOARD LAYOUT
+=================================================== */
 
 .dashboard-layout{
-    flex-direction:column;
+    display:flex;
+    min-height:100vh;
+    background:var(--bg);
 }
 
 .dashboard-content{
-    padding:20px;
+    flex:1;
+    padding:30px;
+    overflow-y:auto;
+    background:var(--bg);
+    transition:.3s;
+}
+
+/* ===================================
+        MOBILE MENU BUTTON
+=================================== */
+
+.mobile-menu-btn{
+    display:none;
+    position:fixed;
+    top:18px;
+    left:18px;
+    width:50px;
+    height:50px;
+    border:none;
+    border-radius:14px;
+    background:var(--primary);
+    color:white;
+    font-size:24px;
+    cursor:pointer;
+    z-index:1200;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+/* ===================================
+            OVERLAY
+=================================== */
+
+.sidebar-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:998;
+}
+
+.sidebar-overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+/* ===================================
+            TABLET
+=================================== */
+
+@media(max-width:992px){
+
+.dashboard-content{
+    padding:24px;
+}
+
+}
+
+/* ===================================
+            MOBILE
+=================================== */
+
+@media(max-width:768px){
+
+.dashboard-layout{
+    display:block;
+}
+
+.dashboard-content{
+    padding:80px 20px 20px;
+}
+
+.mobile-menu-btn{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 }

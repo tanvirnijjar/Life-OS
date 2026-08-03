@@ -7,7 +7,9 @@ import {
   FiTarget,
   FiUser,
   FiSettings,
+  FiX,
 } from "react-icons/fi";
+
 import "./Sidebar.css";
 
 const menuItems = [
@@ -53,9 +55,29 @@ const menuItems = [
   },
 ];
 
-function Sidebar() {
+function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const closeSidebar = () => {
+    if (window.innerWidth <= 768) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
-    <aside className="sidebar">
+    <aside
+      className={
+        sidebarOpen
+          ? "sidebar sidebar-open"
+          : "sidebar"
+      }
+    >
+      {/* Mobile Close Button */}
+      <button
+        className="close-sidebar"
+        onClick={() => setSidebarOpen(false)}
+      >
+        <FiX />
+      </button>
+
       <div className="sidebar-logo">
         <h2>🌼 Life OS</h2>
         <p>Your Productivity Hub</p>
@@ -66,11 +88,17 @@ function Sidebar() {
           <NavLink
             key={item.path}
             to={item.path}
+            onClick={closeSidebar}
             className={({ isActive }) =>
-              isActive ? "sidebar-link active" : "sidebar-link"
+              isActive
+                ? "sidebar-link active"
+                : "sidebar-link"
             }
           >
-            <span className="icon">{item.icon}</span>
+            <span className="icon">
+              {item.icon}
+            </span>
+
             <span>{item.name}</span>
           </NavLink>
         ))}
@@ -78,7 +106,10 @@ function Sidebar() {
 
       <div className="sidebar-footer">
         <small>🌼 Life OS 3.0</small>
-        <p>Stay Focused • Stay Consistent 🚀</p>
+
+        <p>
+          Stay Focused • Stay Consistent 🚀
+        </p>
       </div>
     </aside>
   );
