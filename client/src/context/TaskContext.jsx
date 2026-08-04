@@ -64,6 +64,26 @@ export function TaskProvider({ children }) {
 
     toast.success("🗑 Task Deleted");
   };
+  const clearCompletedTasks = () => {
+  const completed = tasks.filter(
+    (task) => task.completed
+  ).length;
+
+  if (completed === 0) {
+    toast.error("No completed tasks found.");
+    return;
+  }
+
+  setTasks((prev) =>
+    prev.filter((task) => !task.completed)
+  );
+
+  toast.success(
+    `🗑 Cleared ${completed} completed task${
+      completed > 1 ? "s" : ""
+    }`
+  );
+};
 
   const updateTask = (id, newText) => {
     setTasks((prev) =>
@@ -83,13 +103,14 @@ export function TaskProvider({ children }) {
   return (
     <TaskContext.Provider
       value={{
-        tasks,
-        setTasks,
-        addTask,
-        toggleTask,
-        deleteTask,
-        updateTask,
-      }}
+  tasks,
+  setTasks,
+  addTask,
+  toggleTask,
+  deleteTask,
+  updateTask,
+  clearCompletedTasks,
+}}
     >
       {children}
     </TaskContext.Provider>
