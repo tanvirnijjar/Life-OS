@@ -1,67 +1,181 @@
 .notes-card{
+
     background:#fff;
-    border-radius:22px;
+
+    border-radius:24px;
+
     padding:25px;
+
     box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+}
+
+.notes-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 25px 45px rgba(0,0,0,.12);
+}
+
+.notes-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:rgba(245,158,11,.06);
+
+    top:-70px;
+
+    right:-70px;
+}
+
+.notes-card>*{
+
+    position:relative;
+
+    z-index:2;
 }
 
 .notes-header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
-    margin-bottom:25px;
+
+    margin-bottom:22px;
+}
+
+.notes-header h2{
+
+    font-size:22px;
 }
 
 .notes-header span{
+
     background:#FEF3C7;
+
     color:#D97706;
-    padding:6px 14px;
-    border-radius:30px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
     font-size:13px;
-    font-weight:600;
+
+    font-weight:700;
 }
 
 .notes-list{
+
     display:flex;
+
     flex-direction:column;
-    gap:18px;
+
+    gap:15px;
 }
 
 .note-item{
-    padding:18px;
+
+    background:#F8FAFC;
+
     border-radius:18px;
-    background:#FFF7ED;
-    border-left:5px solid #F59E0B;
-    transition:.3s;
+
+    padding:18px;
+
+    transition:all .3s ease;
+
+    border:1px solid transparent;
 }
 
 .note-item:hover{
-    transform:translateY(-4px);
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
+
+    transform:translateX(8px);
+
+    background:#FFF7ED;
+
+    border-color:#FCD34D;
 }
 
 .note-item h3{
+
     margin:0 0 8px;
-    font-size:18px;
+
     color:#1E293B;
+
+    font-size:17px;
 }
 
 .note-item p{
+
     color:#64748B;
-    margin-bottom:12px;
+
+    margin-bottom:14px;
+
+    font-size:14px;
 }
 
 .note-tag{
+
     display:inline-block;
+
     padding:6px 12px;
-    background:#F59E0B;
-    color:white;
-    border-radius:20px;
+
+    border-radius:999px;
+
+    background:#FEF3C7;
+
+    color:#B45309;
+
     font-size:12px;
-    font-weight:600;
+
+    font-weight:700;
 }
 
 .empty-notes{
+
     text-align:center;
-    padding:35px 20px;
+
+    padding:45px 20px;
+}
+
+.empty-icon{
+
+    font-size:54px;
+
+    margin-bottom:12px;
+}
+
+.empty-notes h3{
+
+    color:#D97706;
+
+    margin-bottom:10px;
+}
+
+.empty-notes p{
+
+    color:#64748B;
+}
+
+@media(max-width:768px){
+
+.notes-card{
+
+    padding:22px;
+}
+
 }

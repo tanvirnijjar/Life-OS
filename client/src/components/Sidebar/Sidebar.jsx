@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   FiHome,
   FiCheckSquare,
@@ -7,8 +7,13 @@ import {
   FiTarget,
   FiUser,
   FiSettings,
+  FiLogOut,
   FiX,
 } from "react-icons/fi";
+
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import toast from "react-hot-toast";
 
 import "./Sidebar.css";
 
@@ -56,19 +61,27 @@ const menuItems = [
 ];
 
 function Sidebar({ sidebarOpen, setSidebarOpen }) {
-  const closeSidebar = () => {
-    if (window.innerWidth <= 768) {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+
+      toast.success("👋 Logged Out Successfully");
+
       setSidebarOpen(false);
+
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
   return (
     <aside
-      className={
-        sidebarOpen
-          ? "sidebar sidebar-open"
-          : "sidebar"
-      }
+      className={`sidebar ${
+        sidebarOpen ? "sidebar-open" : ""
+      }`}
     >
       {/* Mobile Close Button */}
       <button
@@ -78,17 +91,19 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         <FiX />
       </button>
 
+      {/* Logo */}
       <div className="sidebar-logo">
         <h2>🌼 Life OS</h2>
         <p>Your Productivity Hub</p>
       </div>
 
+      {/* Navigation */}
       <nav className="sidebar-menu">
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
-            onClick={closeSidebar}
+            onClick={() => setSidebarOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "sidebar-link active"
@@ -104,12 +119,19 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         ))}
       </nav>
 
+      {/* Logout */}
+      <button
+        className="logout-btn"
+        onClick={handleLogout}
+      >
+        <FiLogOut />
+        <span>Logout</span>
+      </button>
+
+      {/* Footer */}
       <div className="sidebar-footer">
         <small>🌼 Life OS 3.0</small>
-
-        <p>
-          Stay Focused • Stay Consistent 🚀
-        </p>
+        <p>Stay Focused • Stay Consistent 🚀</p>
       </div>
     </aside>
   );

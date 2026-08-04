@@ -52,17 +52,27 @@ function OverviewCard() {
     <div className="overview-card">
 
       <div className="overview-header">
+
         <h2>📊 Life OS Overview</h2>
+
         <span>{productivity}% Productive</span>
+
       </div>
 
       <div className="overview-grid">
 
         {overview.map((item) => (
-          <div className="overview-item" key={item.title}>
+
+          <div
+            className="overview-item"
+            key={item.title}
+          >
+
             <div
               className="overview-icon"
-              style={{ background: item.color }}
+              style={{
+                background: item.color,
+              }}
             >
               {item.icon}
             </div>
@@ -70,7 +80,9 @@ function OverviewCard() {
             <h3>{item.value}</h3>
 
             <p>{item.title}</p>
+
           </div>
+
         ))}
 
       </div>

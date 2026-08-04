@@ -1,4 +1,5 @@
 import "./StatsCards.css";
+
 function StatsCards({
   totalTasks,
   completedTasks,
@@ -10,32 +11,44 @@ function StatsCards({
       title: "Total Tasks",
       value: totalTasks,
       icon: "📋",
-      subtitle: "All your tasks",
+      subtitle: `${totalTasks} Tasks`,
+      color: "blue",
     },
     {
       title: "Completed",
       value: completedTasks,
       icon: "✅",
-      subtitle: "Great progress",
+      subtitle: "Great Job 🎉",
+      color: "green",
     },
     {
       title: "Pending",
       value: pendingTasks,
       icon: "⏳",
-      subtitle: "Keep going",
+      subtitle: "Keep Going 💪",
+      color: "orange",
     },
     {
       title: "Productivity",
       value: `${productivity}%`,
-      icon: "📈",
-      subtitle: "Today's efficiency",
+      icon: "🚀",
+      subtitle:
+        productivity >= 80
+          ? "Excellent ⭐"
+          : productivity >= 50
+          ? "On Track 👍"
+          : "Let's Improve 💪",
+      color: "purple",
     },
   ];
 
   return (
     <div className="stats-grid">
       {stats.map((item) => (
-        <div className="card" key={item.title}>
+        <div
+          className={`card ${item.color}`}
+          key={item.title}
+        >
           <div className="card-top">
             <div className="card-icon">
               {item.icon}

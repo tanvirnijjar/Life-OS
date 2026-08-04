@@ -30,36 +30,59 @@ function UpcomingDeadlines() {
 
   return (
     <div className="deadline-card">
+
       <div className="deadline-header">
+
         <h2>📅 Upcoming Deadlines</h2>
+
         <span>{upcoming.length} Upcoming</span>
+
       </div>
 
       {upcoming.length === 0 ? (
+
         <div className="empty-deadline">
-          <h3>🎉 You're all caught up!</h3>
+
+          <div className="empty-icon">🎉</div>
+
+          <h3>You're all caught up!</h3>
+
           <p>No upcoming deadlines.</p>
+
         </div>
+
       ) : (
+
         <div className="deadline-list">
+
           {upcoming.map((item) => (
+
             <div className="deadline-item" key={item.id}>
+
               <div className="deadline-icon">
                 {item.type === "Task" ? "📋" : "🎯"}
               </div>
 
               <div className="deadline-info">
+
                 <h3>{item.title}</h3>
+
                 <p>{item.type}</p>
+
               </div>
 
               <div className="deadline-date">
                 📅 {item.date}
               </div>
+
             </div>
+
           ))}
+
         </div>
+
       )}
+
     </div>
   );
 }

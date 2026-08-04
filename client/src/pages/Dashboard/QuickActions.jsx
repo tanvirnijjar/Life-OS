@@ -33,29 +33,42 @@ function QuickActions() {
 
   return (
     <div className="quick-card">
+
       <div className="quick-header">
+
         <h2>⚡ Quick Actions</h2>
+
         <p>Jump to your most-used features</p>
+
       </div>
 
       <div className="quick-grid">
+
         {actions.map((action) => (
-          <div
+
+          <button
             key={action.title}
             className="quick-item"
             onClick={() => navigate(action.path)}
           >
+
             <div
               className="quick-icon"
-              style={{ background: action.color }}
+              style={{
+                background: action.color,
+              }}
             >
               {action.icon}
             </div>
 
             <h3>{action.title}</h3>
-          </div>
+
+          </button>
+
         ))}
+
       </div>
+
     </div>
   );
 }

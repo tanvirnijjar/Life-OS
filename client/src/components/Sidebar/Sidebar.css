@@ -2,184 +2,200 @@
                 LIFE OS - SIDEBAR
 =================================================== */
 
-.sidebar{
-    width:260px;
-    min-height:100vh;
-    background:var(--card);
-    border-right:1px solid var(--border);
-    display:flex;
-    flex-direction:column;
-    padding:20px;
-    box-sizing:border-box;
-    flex-shrink:0;
-    transition:.35s ease;
-    z-index:1000;
+.sidebar {
+  width: 260px;
+  min-height: 100vh;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  transition: all 0.35s ease;
+  z-index: 1100;
 }
 
 /* ===================================
-                CLOSE BUTTON
+            CLOSE BUTTON
 =================================== */
 
-.close-sidebar{
-    display:none;
-    align-self:flex-end;
-    width:42px;
-    height:42px;
-    border:none;
-    border-radius:12px;
-    background:var(--primary);
-    color:white;
-    font-size:22px;
-    cursor:pointer;
-    margin-bottom:15px;
+.close-sidebar {
+  display: none;
+  align-self: flex-end;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.25s;
+}
+
+.close-sidebar:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
 }
 
 /* ===================================
                 LOGO
 =================================== */
 
-.sidebar-logo{
-    margin-bottom:35px;
+.sidebar-logo {
+  margin-bottom: 35px;
 }
 
-.sidebar-logo h2{
-    font-size:28px;
-    color:var(--primary);
-    margin-bottom:8px;
+.sidebar-logo h2 {
+  font-size: 28px;
+  color: var(--primary);
+  margin-bottom: 8px;
 }
 
-.sidebar-logo p{
-    color:var(--secondary);
-    font-size:14px;
+.sidebar-logo p {
+  color: var(--secondary);
+  font-size: 14px;
 }
 
 /* ===================================
                 MENU
 =================================== */
 
-.sidebar-menu{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    flex:1;
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }
 
-.sidebar-link{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:14px 18px;
-    border-radius:14px;
-    text-decoration:none;
-    color:var(--text);
-    font-weight:600;
-    transition:.25s;
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  transition: 0.25s;
 }
 
-.sidebar-link:hover{
-    background:var(--primary);
-    color:white;
+.sidebar-link:hover {
+  background: var(--primary);
+  color: white;
 }
 
-.sidebar-link.active{
-    background:var(--primary);
-    color:white;
+.sidebar-link.active {
+  background: var(--primary);
+  color: white;
 }
 
-.icon{
-    font-size:20px;
+.icon {
+  font-size: 20px;
+}
+
+/* ===================================
+            LOGOUT BUTTON
+=================================== */
+
+.logout-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 14px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
 }
 
 /* ===================================
                 FOOTER
 =================================== */
 
-.sidebar-footer{
-    margin-top:30px;
-    border-top:1px solid var(--border);
-    padding-top:20px;
+.sidebar-footer {
+  margin-top: 30px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
 }
 
-.sidebar-footer small{
-    display:block;
-    color:var(--primary);
-    font-weight:700;
+.sidebar-footer small {
+  display: block;
+  color: var(--primary);
+  font-weight: 700;
 }
 
-.sidebar-footer p{
-    margin-top:8px;
-    color:var(--secondary);
-    font-size:13px;
+.sidebar-footer p {
+  margin-top: 8px;
+  color: var(--secondary);
+  font-size: 13px;
 }
 
 /* ===================================
             TABLET
 =================================== */
 
-@media(max-width:992px){
-
-.sidebar{
-    width:240px;
-}
-
+@media (max-width: 992px) {
+  .sidebar {
+    width: 240px;
+  }
 }
 
 /* ===================================
             MOBILE
 =================================== */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
 
-.sidebar{
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 260px;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    transition: left 0.35s ease;
+    z-index: 1200;
+  }
 
-    position:fixed;
+  .sidebar.sidebar-open {
+    left: 0;
+  }
 
-    top:0;
+  .close-sidebar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-    left:-280px;
+  .sidebar-logo h2 {
+    font-size: 24px;
+  }
 
-    width:260px;
+  .sidebar-link {
+    padding: 14px;
+  }
 
-    height:100vh;
+  .sidebar-footer {
+    margin-top: auto;
+  }
 
-    overflow-y:auto;
-
-    box-shadow:0 20px 40px rgba(0,0,0,.25);
-
-}
-
-.sidebar.sidebar-open{
-
-    left:0;
-
-}
-
-.close-sidebar{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-}
-
-.sidebar-logo h2{
-
-    font-size:24px;
-
-}
-
-.sidebar-link{
-
-    padding:14px;
-
-}
-
-.sidebar-footer{
-
-    margin-top:auto;
-
-}
-
+  .logout-btn {
+    margin-top: 16px;
+  }
 }

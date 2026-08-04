@@ -1,64 +1,164 @@
 .overview-card{
+
     background:#fff;
-    border-radius:22px;
+
     padding:25px;
+
+    border-radius:24px;
+
     box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:.35s ease;
+}
+
+.overview-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 25px 45px rgba(0,0,0,.12);
+}
+
+.overview-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(59,130,246,.05);
+
+    top:-80px;
+    right:-80px;
+}
+
+.overview-card>*{
+
+    position:relative;
+
+    z-index:2;
 }
 
 .overview-header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
-    margin-bottom:25px;
+
+    margin-bottom:24px;
+}
+
+.overview-header h2{
+
+    font-size:22px;
 }
 
 .overview-header span{
+
     background:#DBEAFE;
+
     color:#2563EB;
-    padding:6px 14px;
-    border-radius:25px;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
     font-size:13px;
-    font-weight:600;
+
+    font-weight:700;
 }
 
 .overview-grid{
+
     display:grid;
+
     grid-template-columns:repeat(2,1fr);
+
     gap:18px;
 }
 
 .overview-item{
+
     background:#F8FAFC;
+
     border-radius:18px;
+
     padding:20px;
+
     text-align:center;
+
     transition:.3s;
+
+    border:1px solid transparent;
 }
 
 .overview-item:hover{
-    transform:translateY(-5px);
+
+    transform:translateY(-6px);
+
     background:#EFF6FF;
+
+    border-color:#BFDBFE;
 }
 
 .overview-icon{
-    width:55px;
-    height:55px;
-    margin:auto;
-    border-radius:50%;
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:18px;
+
     display:flex;
+
     justify-content:center;
+
     align-items:center;
-    color:white;
-    font-size:26px;
+
+    color:#fff;
+
+    font-size:28px;
+
+    margin:0 auto 15px;
+
+    transition:.3s;
+}
+
+.overview-item:hover .overview-icon{
+
+    transform:rotate(8deg) scale(1.1);
 }
 
 .overview-item h3{
-    margin:15px 0 5px;
-    font-size:28px;
+
+    font-size:30px;
+
+    margin-bottom:6px;
+
     color:#1E293B;
 }
 
 .overview-item p{
+
     color:#64748B;
+
     font-size:14px;
+}
+
+@media(max-width:768px){
+
+.overview-grid{
+
+    grid-template-columns:1fr;
+}
+
 }

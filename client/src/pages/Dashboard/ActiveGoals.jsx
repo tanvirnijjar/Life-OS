@@ -10,40 +10,76 @@ function ActiveGoals() {
 
   return (
     <div className="goals-card">
+
       <div className="goals-header">
+
         <h2>🎯 Active Goals</h2>
+
         <span>{activeGoals.length} Active</span>
+
       </div>
 
       {activeGoals.length === 0 ? (
+
         <div className="empty-goals">
-          <h3>🎯 No Goals Yet</h3>
-          <p>Create your first goal and start making progress.</p>
+
+          <div className="empty-icon">🎯</div>
+
+          <h3>No Goals Yet</h3>
+
+          <p>
+            Create your first goal and start making progress.
+          </p>
+
         </div>
+
       ) : (
+
         <div className="goal-list">
+
           {activeGoals.map((goal) => (
+
             <div className="goal-item" key={goal.id}>
+
               <div className="goal-top">
+
                 <h3>{goal.title}</h3>
+
                 <span>{goal.progress}%</span>
+
               </div>
 
               <div className="progress-bar">
+
                 <div
                   className="progress-fill"
-                  style={{ width: `${goal.progress}%` }}
-                ></div>
+                  style={{
+                    width: `${goal.progress}%`,
+                  }}
+                />
+
               </div>
 
               <div className="goal-footer">
-                <small>🏷 {goal.priority}</small>
-                <small>📅 {goal.deadline}</small>
+
+                <small className="goal-priority">
+                  🏷 {goal.priority}
+                </small>
+
+                <small>
+                  📅 {goal.deadline}
+                </small>
+
               </div>
+
             </div>
+
           ))}
+
         </div>
+
       )}
+
     </div>
   );
 }
