@@ -11,33 +11,28 @@ function StatsCards({
       title: "Total Tasks",
       value: totalTasks,
       icon: "📋",
-      subtitle: `${totalTasks} Tasks`,
+      subtitle: "All Tasks",
       color: "blue",
     },
     {
       title: "Completed",
       value: completedTasks,
       icon: "✅",
-      subtitle: "Great Job 🎉",
+      subtitle: "Great Work",
       color: "green",
     },
     {
       title: "Pending",
       value: pendingTasks,
       icon: "⏳",
-      subtitle: "Keep Going 💪",
+      subtitle: "Keep Going",
       color: "orange",
     },
     {
       title: "Productivity",
       value: `${productivity}%`,
       icon: "🚀",
-      subtitle:
-        productivity >= 80
-          ? "Excellent ⭐"
-          : productivity >= 50
-          ? "On Track 👍"
-          : "Let's Improve 💪",
+      subtitle: "Today's Score",
       color: "purple",
     },
   ];
@@ -46,13 +41,13 @@ function StatsCards({
     <div className="stats-grid">
       {stats.map((item) => (
         <div
-          className={`card ${item.color}`}
           key={item.title}
+          className={`stats-card ${item.color}`}
         >
-          <div className="card-top">
-            <div className="card-icon">
+          <div className="stats-header">
+            <span className="stats-icon">
               {item.icon}
-            </div>
+            </span>
           </div>
 
           <h2>{item.value}</h2>

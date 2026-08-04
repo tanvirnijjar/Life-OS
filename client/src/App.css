@@ -1,3 +1,8 @@
+@import "./styles/variables.css";
+@import "./styles/cards.css";
+@import "./styles/buttons.css";
+@import "./styles/animations.css";
+@import "./styles/utilities.css";
 /* =====================================================
                     GLOBAL RESET
 ===================================================== */

@@ -1,22 +1,46 @@
 import "./Dashboard.css";
+import { motion } from "framer-motion";
 
 import { useTasks } from "../../context/TaskContext";
 
 import WelcomeCard from "./WelcomeCard";
 import StatsCards from "./StatsCards";
-
 import RecentTasks from "./RecentTasks";
 import ProgressCard from "./ProgressCard";
-
 import RecentNotes from "./RecentNotes";
 import OverviewCard from "./OverviewCard";
 import ActiveGoals from "./ActiveGoals";
-
 import PedometerWidget from "./PedometerWidget";
 import QuickActions from "./QuickActions";
 import UpcomingDeadlines from "./UpcomingDeadlines";
-
 import QuoteCard from "./QuoteCard";
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 function Dashboard() {
   const { tasks } = useTasks();
@@ -27,7 +51,8 @@ function Dashboard() {
     (task) => task.completed
   ).length;
 
-  const pendingTasks = totalTasks - completedTasks;
+  const pendingTasks =
+    totalTasks - completedTasks;
 
   const productivity =
     totalTasks === 0
@@ -37,68 +62,89 @@ function Dashboard() {
         );
 
   return (
-    <div className="dashboard">
+    <motion.div
+      className="dashboard"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Welcome */}
 
-      <WelcomeCard />
+      <motion.div variants={cardVariants}>
+        <WelcomeCard />
+      </motion.div>
 
-      <StatsCards
-        totalTasks={totalTasks}
-        completedTasks={completedTasks}
-        pendingTasks={pendingTasks}
-        productivity={productivity}
-      />
+      {/* Stats */}
 
-      {/* ================= ROW 1 ================= */}
+      <motion.div variants={cardVariants}>
+        <StatsCards
+          totalTasks={totalTasks}
+          completedTasks={completedTasks}
+          pendingTasks={pendingTasks}
+          productivity={productivity}
+        />
+      </motion.div>
+
+      {/* Row 1 */}
 
       <div className="dashboard-row row1">
-
-        <div className="recent-tasks">
+        <motion.div
+          className="recent-tasks"
+          variants={cardVariants}
+        >
           <RecentTasks tasks={tasks} />
-        </div>
+        </motion.div>
 
-        <div className="progress">
+        <motion.div
+          className="progress"
+          variants={cardVariants}
+        >
           <ProgressCard
             totalTasks={totalTasks}
             completedTasks={completedTasks}
             productivity={productivity}
           />
-        </div>
-
+        </motion.div>
       </div>
 
-      {/* ================= ROW 2 ================= */}
+      {/* Row 2 */}
 
       <div className="dashboard-row row2">
+        <motion.div variants={cardVariants}>
+          <RecentNotes />
+        </motion.div>
 
-        <RecentNotes />
+        <motion.div variants={cardVariants}>
+          <OverviewCard />
+        </motion.div>
 
-        <OverviewCard />
-
-        <ActiveGoals />
-
+        <motion.div variants={cardVariants}>
+          <ActiveGoals />
+        </motion.div>
       </div>
 
-      {/* ================= ROW 3 ================= */}
+      {/* Row 3 */}
 
       <div className="dashboard-row row3">
+        <motion.div variants={cardVariants}>
+          <PedometerWidget />
+        </motion.div>
 
-        <PedometerWidget />
+        <motion.div variants={cardVariants}>
+          <QuickActions />
+        </motion.div>
 
-        <QuickActions />
-
-        <UpcomingDeadlines />
-
+        <motion.div variants={cardVariants}>
+          <UpcomingDeadlines />
+        </motion.div>
       </div>
 
-      {/* ================= ROW 4 ================= */}
+      {/* Quote */}
 
-      <div className="dashboard-row row4">
-
+      <motion.div variants={cardVariants}>
         <QuoteCard />
-
-      </div>
-
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 

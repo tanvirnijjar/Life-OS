@@ -19,7 +19,7 @@
     margin-bottom:30px;
 
     box-shadow:
-        0 20px 40px rgba(37,99,235,.25),
+        0 25px 60px rgba(37,99,235,.25),
         inset 0 1px 1px rgba(255,255,255,.15);
 
     overflow:hidden;
@@ -170,5 +170,23 @@
     width:100%;
     max-width:100%;
 }
+.welcome-card::before{
 
+content:"";
+
+position:absolute;
+
+width:280px;
+height:280px;
+
+background:rgba(255,255,255,.12);
+
+border-radius:50%;
+
+right:-80px;
+
+top:-100px;
+
+filter:blur(10px);
+}
 }

@@ -5,7 +5,11 @@
 .dashboard{
   width:100%;
   min-height:100vh;
-  background:var(--bg);
+  background:linear-gradient(
+180deg,
+#F4F8FF,
+#EEF4FF
+);
   color:var(--text);
   padding:30px;
   transition:background .3s ease,color .3s ease;
