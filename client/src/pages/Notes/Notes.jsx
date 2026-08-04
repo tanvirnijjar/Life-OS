@@ -33,70 +33,74 @@ function Notes() {
     .sort((a, b) => b.pinned - a.pinned);
 
   return (
-  <div className="notes-page">
+    <div className="notes-page">
 
-    {/* Header */}
-    <div className="notes-header">
-      <div>
-        <h1>Notes</h1>
-        <p>
-          Organize your ideas, study notes and important information.
-        </p>
-      </div>
-    </div>
-
-    {/* Controls */}
-    <div className="notes-controls">
-
-      <NoteForm addNote={addNote} />
-
-      <SearchBar
-        search={search}
-        setSearch={setSearch}
-      />
-
-      <CategoryFilter
-        category={category}
-        setCategory={setCategory}
-      />
-
-    </div>
-
-    {/* Notes Grid */}
-    <div className="notes-grid">
-
-      {filteredNotes.length === 0 ? (
-
-        <div className="empty-state">
-
-          <h2>📝 No Notes Yet</h2>
+      {/* Header */}
+      <div className="notes-header">
+        <div>
+          <h1>Notes</h1>
 
           <p>
-            Create your first note to get started.
+            Organize your ideas, study notes and important information.
           </p>
 
+          <small>
+            {filteredNotes.length} note
+            {filteredNotes.length !== 1 ? "s" : ""}
+          </small>
         </div>
+      </div>
 
-      ) : (
+      {/* Controls */}
+      <div className="notes-controls">
 
-        filteredNotes.map((note) => (
+        <NoteForm addNote={addNote} />
 
-          <NoteCard
-            key={note.id}
-            note={note}
-            deleteNote={deleteNote}
-            togglePin={togglePin}
-            editNote={editNote}
-          />
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+        />
 
-        ))
+        <CategoryFilter
+          category={category}
+          setCategory={setCategory}
+        />
 
-      )}
+      </div>
+
+      {/* Notes Grid */}
+      <div className="notes-grid">
+
+        {filteredNotes.length === 0 ? (
+
+          <div className="empty-state">
+
+            <h2>📝 No Notes Yet</h2>
+
+            <p>
+              Create your first note to get started.
+            </p>
+
+          </div>
+
+        ) : (
+
+          filteredNotes.map((note) => (
+            <NoteCard
+              key={note.id}
+              note={note}
+              deleteNote={deleteNote}
+              togglePin={togglePin}
+              editNote={editNote}
+            />
+          ))
+
+        )}
+
+      </div>
 
     </div>
-
-  </div>
-);
+  );
 }
 
 export default Notes;

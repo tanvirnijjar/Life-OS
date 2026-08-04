@@ -97,14 +97,61 @@ const router = createBrowserRouter([
     element: (
       <div
         style={{
-          display: "grid",
-          placeItems: "center",
-          height: "100vh",
-          fontSize: "2rem",
-          fontWeight: "bold",
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          background: "linear-gradient(135deg, #EFF6FF, #DBEAFE)",
+          textAlign: "center",
+          padding: "20px",
         }}
       >
-        404 | Page Not Found
+        <h1
+          style={{
+            fontSize: "7rem",
+            margin: 0,
+            color: "#2563EB",
+          }}
+        >
+          404
+        </h1>
+
+        <h2
+          style={{
+            marginTop: "10px",
+            color: "#1E293B",
+          }}
+        >
+          Oops! Page Not Found
+        </h2>
+
+        <p
+          style={{
+            maxWidth: "420px",
+            color: "#64748B",
+            margin: "20px 0 30px",
+            lineHeight: 1.6,
+          }}
+        >
+          The page you're looking for doesn't exist or has
+          been moved.
+        </p>
+
+        <a
+          href="/dashboard"
+          style={{
+            background: "#2563EB",
+            color: "#fff",
+            padding: "14px 28px",
+            borderRadius: "14px",
+            textDecoration: "none",
+            fontWeight: "600",
+            transition: ".3s",
+          }}
+        >
+          🏠 Back to Dashboard
+        </a>
       </div>
     ),
   },

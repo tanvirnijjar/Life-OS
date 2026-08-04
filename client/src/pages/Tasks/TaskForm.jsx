@@ -11,7 +11,7 @@ function TaskForm({ addTask }) {
     if (!task.trim()) return;
 
     addTask({
-      text: task,
+      text: task.trim(),
       priority,
       dueDate,
     });
@@ -22,11 +22,17 @@ function TaskForm({ addTask }) {
   };
 
   return (
-    <form className="task-input" onSubmit={handleSubmit}>
+    <form
+      className="task-input"
+      onSubmit={handleSubmit}
+      autoComplete="off"
+    >
       <input
         type="text"
-        placeholder="Enter a task..."
+        placeholder="What would you like to accomplish today?"
         value={task}
+        maxLength={100}
+        autoFocus
         onChange={(e) => setTask(e.target.value)}
       />
 
@@ -34,9 +40,9 @@ function TaskForm({ addTask }) {
         value={priority}
         onChange={(e) => setPriority(e.target.value)}
       >
-        <option value="High">🔴 High</option>
-        <option value="Medium">🟡 Medium</option>
-        <option value="Low">🟢 Low</option>
+        <option value="High">🔴 High Priority</option>
+        <option value="Medium">🟡 Medium Priority</option>
+        <option value="Low">🟢 Low Priority</option>
       </select>
 
       <input

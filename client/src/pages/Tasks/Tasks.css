@@ -86,10 +86,30 @@
     transition:.3s;
 }
 
-.task-input button:hover{
-    transform:translateY(-2px);
-    opacity:.9;
+.task-input button{
+    padding:14px 24px;
+    border:none;
+    border-radius:14px;
+    background:var(--primary);
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        opacity .25s ease;
 }
+
+.task-input button:hover{
+    transform:translateY(-3px);
+    opacity:.95;
+    box-shadow:0 12px 25px rgba(37,99,235,.30);
+}
+
+.task-input button:active{
+    transform:scale(.97);
+}
+
 
 /* ===================================
           SEARCH
@@ -138,10 +158,15 @@
     transition:.3s;
     font-weight:600;
 }
-
 .filter-btn:hover{
     background:var(--primary);
     color:white;
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(37,99,235,.20);
+}
+
+.filter-btn:active{
+    transform:scale(.96);
 }
 
 .active-filter{
@@ -248,9 +273,27 @@
     transition:.3s;
 }
 
+.delete-btn{
+    padding:10px 18px;
+    border:none;
+    border-radius:12px;
+    background:#EF4444;
+    color:white;
+    cursor:pointer;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
 .delete-btn:hover{
     background:#DC2626;
-    transform:scale(1.05);
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(239,68,68,.28);
+}
+
+.delete-btn:active{
+    transform:scale(.96);
 }
 
 /* ===================================

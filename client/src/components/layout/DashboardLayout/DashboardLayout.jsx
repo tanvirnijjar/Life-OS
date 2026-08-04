@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { FiMenu } from "react-icons/fi";
+import { AnimatePresence, motion } from "framer-motion";
 
 import Sidebar from "../../Sidebar/Sidebar";
 import "./DashboardLayout.css";
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const location = useLocation();
 
   return (
     <>
@@ -35,7 +38,29 @@ const DashboardLayout = () => {
         />
 
         <main className="dashboard-content">
-          <Outlet />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              exit={{
+                opacity: 0,
+                y: -15,
+              }}
+              transition={{
+                duration: 0.25,
+                ease: "easeOut",
+              }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
     </>

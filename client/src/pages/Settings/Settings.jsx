@@ -10,7 +10,12 @@ function Settings() {
         "Are you sure you want to clear all Life OS data?"
       )
     ) {
-      localStorage.clear();
+      Object.keys(localStorage).forEach((key) => {
+        if (key.startsWith("lifeos_")) {
+          localStorage.removeItem(key);
+        }
+      });
+
       window.location.reload();
     }
   };
@@ -22,37 +27,61 @@ function Settings() {
       <div className="settings-card">
         <h2>🎨 Choose Theme</h2>
 
+        <p>
+          Current Theme: <strong>{theme}</strong>
+        </p>
+
         <div className="theme-options">
           <button
-            className={theme === "dark" ? "theme-btn active" : "theme-btn"}
+            className={
+              theme === "dark"
+                ? "theme-btn active"
+                : "theme-btn"
+            }
             onClick={() => changeTheme("dark")}
           >
             🌙 Dark
           </button>
 
           <button
-            className={theme === "light" ? "theme-btn active" : "theme-btn"}
+            className={
+              theme === "light"
+                ? "theme-btn active"
+                : "theme-btn"
+            }
             onClick={() => changeTheme("light")}
           >
             ☀️ Light
           </button>
 
           <button
-            className={theme === "blue" ? "theme-btn active" : "theme-btn"}
+            className={
+              theme === "blue"
+                ? "theme-btn active"
+                : "theme-btn"
+            }
             onClick={() => changeTheme("blue")}
           >
             🌌 Blue
           </button>
 
           <button
-            className={theme === "green" ? "theme-btn active" : "theme-btn"}
+            className={
+              theme === "green"
+                ? "theme-btn active"
+                : "theme-btn"
+            }
             onClick={() => changeTheme("green")}
           >
             🌿 Green
           </button>
 
           <button
-            className={theme === "purple" ? "theme-btn active" : "theme-btn"}
+            className={
+              theme === "purple"
+                ? "theme-btn active"
+                : "theme-btn"
+            }
             onClick={() => changeTheme("purple")}
           >
             💜 Purple
@@ -63,14 +92,16 @@ function Settings() {
           className="danger-btn"
           onClick={clearData}
         >
-          🗑 Clear All Local Data
+          🗑 Clear Life OS Data
         </button>
       </div>
 
       <div className="about-card">
         <h2>ℹ️ About Life OS</h2>
 
-        <p>Version 1.1</p>
+        <p>
+          <strong>Version 4.0</strong>
+        </p>
 
         <p>
           Built with ❤️ using React,

@@ -32,12 +32,26 @@ function Calendar() {
   return (
     <div className="calendar-page">
 
+      {/* Header */}
+
       <div className="calendar-title">
+
         <h1>Calendar</h1>
+
         <p>
           Organize your schedule and keep track of important dates.
         </p>
+
+        <small>
+          {today.toLocaleString("default", {
+            month: "long",
+          })}{" "}
+          {today.getFullYear()}
+        </small>
+
       </div>
+
+      {/* Summary */}
 
       <div className="calendar-summary">
 
@@ -56,11 +70,17 @@ function Calendar() {
         </div>
 
         <div className="summary-card">
-          <h2>{today.getFullYear()}</h2>
-          <p>Year</p>
+          <h2>
+            {today.toLocaleDateString("default", {
+              weekday: "long",
+            })}
+          </h2>
+          <p>Today</p>
         </div>
 
       </div>
+
+      {/* Calendar */}
 
       <div className="calendar-container">
 

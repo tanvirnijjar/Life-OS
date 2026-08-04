@@ -5,14 +5,21 @@
 .dashboard{
   width:100%;
   min-height:100vh;
+
   background:linear-gradient(
-180deg,
-#F4F8FF,
-#EEF4FF
-);
+      180deg,
+      #F8FBFF 0%,
+      #F2F7FF 45%,
+      #EDF4FF 100%
+  );
+
   color:var(--text);
+
   padding:30px;
-  transition:background .3s ease,color .3s ease;
+
+  transition:
+      background .35s ease,
+      color .35s ease;
 }
 
 .dashboard > *:not(:last-child){
@@ -70,7 +77,24 @@
 .row2 > *,
 .row3 > *,
 .row4 > *{
+
   width:100%;
+
+  transition:
+      transform var(--transition),
+      box-shadow var(--transition);
+}
+
+/* =========================================
+            PREMIUM HOVER
+========================================= */
+
+.row1 > *:hover,
+.row2 > *:hover,
+.row3 > *:hover,
+.row4 > *:hover{
+
+  transform:translateY(-4px);
 }
 
 /* =========================================
@@ -86,11 +110,12 @@
 }
 
 /* =========================================
-            ANIMATION
+            PAGE ANIMATION
 ========================================= */
 
 .dashboard{
-  animation:fadeIn .4s ease;
+
+  animation:fadeIn .45s ease;
 }
 
 @keyframes fadeIn{
@@ -116,6 +141,7 @@ transform:translateY(0);
 .row1,
 .row2,
 .row3{
+
 grid-template-columns:repeat(2,1fr);
 }
 
@@ -128,11 +154,14 @@ grid-template-columns:repeat(2,1fr);
 @media(max-width:768px){
 
 .dashboard{
+
 padding:18px;
 }
 
 .dashboard-row{
+
 grid-template-columns:1fr !important;
+
 gap:18px;
 }
 

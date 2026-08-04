@@ -18,8 +18,8 @@ function Goals() {
   }, [goals]);
 
   const addGoal = (goal) => {
-    setGoals([
-      ...goals,
+    setGoals((prev) => [
+      ...prev,
       {
         ...goal,
         id: Date.now(),
@@ -29,8 +29,8 @@ function Goals() {
   };
 
   const editGoal = (id, updatedGoal) => {
-    setGoals(
-      goals.map((goal) =>
+    setGoals((prev) =>
+      prev.map((goal) =>
         goal.id === id
           ? { ...goal, ...updatedGoal }
           : goal
@@ -39,8 +39,8 @@ function Goals() {
   };
 
   const toggleComplete = (id) => {
-    setGoals(
-      goals.map((goal) =>
+    setGoals((prev) =>
+      prev.map((goal) =>
         goal.id === id
           ? {
               ...goal,
@@ -52,8 +52,8 @@ function Goals() {
   };
 
   const deleteGoal = (id) => {
-    setGoals(
-      goals.filter((goal) => goal.id !== id)
+    setGoals((prev) =>
+      prev.filter((goal) => goal.id !== id)
     );
   };
 
@@ -63,6 +63,10 @@ function Goals() {
 
   const activeGoals = goals.length - completedGoals;
 
+  const sortedGoals = [...goals].sort(
+    (a, b) => Number(a.completed) - Number(b.completed)
+  );
+
   return (
     <div className="goals-page">
 
@@ -70,9 +74,15 @@ function Goals() {
       <div className="goals-header">
         <div>
           <h1>Goals</h1>
+
           <p>
             Track your progress and achieve your dreams.
           </p>
+
+          <small>
+            {goals.length} goal
+            {goals.length !== 1 ? "s" : ""}
+          </small>
         </div>
       </div>
 
@@ -104,10 +114,11 @@ function Goals() {
       {/* Goals */}
       <div className="goals-list">
 
-        {goals.length === 0 ? (
+        {sortedGoals.length === 0 ? (
 
           <div className="empty-state">
             <h2>🎯 No Goals Yet</h2>
+
             <p>
               Set your first goal and start achieving something amazing.
             </p>
@@ -115,7 +126,7 @@ function Goals() {
 
         ) : (
 
-          goals.map((goal) => (
+          sortedGoals.map((goal) => (
             <GoalCard
               key={goal.id}
               goal={goal}
