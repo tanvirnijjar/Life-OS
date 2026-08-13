@@ -4,113 +4,164 @@ import {
   useEffect,
   useState,
 } from "react";
+
 import toast from "react-hot-toast";
+
+import {
+  getTasks,
+  createTask,
+  updateTask as updateTaskService,
+  deleteTask as deleteTaskService,
+  toggleTask as toggleTaskService,
+} from "../services/taskService";
 
 const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
-  const [tasks, setTasks] = useState(() => {
-    const saved = localStorage.getItem("lifeos_tasks");
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [tasks, setTasks] = useState([]);
+
+  // ==========================
+  // Load Tasks
+  // ==========================
+  const fetchTasks = async () => {
+    try {
+      const data = await getTasks();
+      setTasks(data.tasks || []);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to load tasks");
+    }
+  };
 
   useEffect(() => {
-    localStorage.setItem(
-      "lifeos_tasks",
-      JSON.stringify(tasks)
-    );
-  }, [tasks]);
+    fetchTasks();
+  }, []);
 
-  const addTask = (task) => {
-    setTasks((prev) => [
-      ...prev,
-      {
-        ...task,
-        id: Date.now(),
-        completed: false,
-      },
-    ]);
+  // ==========================
+  // Add Task
+  // ==========================
+  const addTask = async (task) => {
+    try {
+      const data = await createTask(task);
 
-    toast.success("✅ Task Added Successfully");
+      setTasks((prev) => [data.task, ...prev]);
+
+      toast.success("✅ Task Added Successfully");
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message ||
+          "Failed to add task"
+      );
+    }
   };
 
-  const toggleTask = (id) => {
-    setTasks((prev) =>
-      prev.map((task) => {
-        if (task.id === id) {
-          const updatedTask = {
-            ...task,
-            completed: !task.completed,
-          };
+  // ==========================
+  // Toggle Task
+  // ==========================
+  const toggleTask = async (id) => {
+    try {
+      const data = await toggleTaskService(id);
 
-          toast.success(
-            updatedTask.completed
-              ? "🎉 Task Completed!"
-              : "📌 Task Marked Pending"
-          );
+      setTasks((prev) =>
+        prev.map((task) =>
+          task._id === id ? data.task : task
+        )
+      );
 
-          return updatedTask;
-        }
-
-        return task;
-      })
-    );
+      toast.success(
+        data.task.completed
+          ? "🎉 Task Completed!"
+          : "📌 Task Marked Pending"
+      );
+    } catch (error) {
+      toast.error("Failed to update task");
+    }
   };
 
-  const deleteTask = (id) => {
-    setTasks((prev) =>
-      prev.filter((task) => task.id !== id)
-    );
+  // ==========================
+  // Update Task
+  // ==========================
+  const updateTask = async (id, title) => {
+    try {
+      const data = await updateTaskService(id, {
+        title,
+      });
 
-    toast.success("🗑 Task Deleted");
+      setTasks((prev) =>
+        prev.map((task) =>
+          task._id === id ? data.task : task
+        )
+      );
+
+      toast.success("✏️ Task Updated");
+    } catch (error) {
+      toast.error("Failed to update task");
+    }
   };
-  const clearCompletedTasks = () => {
-  const completed = tasks.filter(
-    (task) => task.completed
-  ).length;
 
-  if (completed === 0) {
-    toast.error("No completed tasks found.");
-    return;
-  }
+  // ==========================
+  // Delete Task
+  // ==========================
+  const deleteTask = async (id) => {
+    try {
+      await deleteTaskService(id);
 
-  setTasks((prev) =>
-    prev.filter((task) => !task.completed)
-  );
+      setTasks((prev) =>
+        prev.filter((task) => task._id !== id)
+      );
 
-  toast.success(
-    `🗑 Cleared ${completed} completed task${
-      completed > 1 ? "s" : ""
-    }`
-  );
-};
+      toast.success("🗑 Task Deleted");
+    } catch (error) {
+      toast.error("Failed to delete task");
+    }
+  };
 
-  const updateTask = (id, newText) => {
-    setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id
-          ? {
-              ...task,
-              text: newText,
-            }
-          : task
-      )
-    );
+  // ==========================
+  // Clear Completed Tasks
+  // ==========================
+  const clearCompletedTasks = async () => {
+    try {
+      const completedTasks = tasks.filter(
+        (task) => task.completed
+      );
 
-    toast.success("✏️ Task Updated");
+      if (completedTasks.length === 0) {
+        toast.error("No completed tasks found.");
+        return;
+      }
+
+      await Promise.all(
+        completedTasks.map((task) =>
+          deleteTaskService(task._id)
+        )
+      );
+
+      setTasks((prev) =>
+        prev.filter((task) => !task.completed)
+      );
+
+      toast.success(
+        `🗑 Cleared ${completedTasks.length} completed task${
+          completedTasks.length > 1 ? "s" : ""
+        }`
+      );
+    } catch (error) {
+      toast.error("Failed to clear completed tasks");
+    }
   };
 
   return (
     <TaskContext.Provider
       value={{
-  tasks,
-  setTasks,
-  addTask,
-  toggleTask,
-  deleteTask,
-  updateTask,
-  clearCompletedTasks,
-}}
+        tasks,
+        setTasks,
+        fetchTasks,
+        addTask,
+        toggleTask,
+        updateTask,
+        deleteTask,
+        clearCompletedTasks,
+      }}
     >
       {children}
     </TaskContext.Provider>

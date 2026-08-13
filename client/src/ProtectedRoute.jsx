@@ -1,25 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase/firebase";
 
 const ProtectedRoute = () => {
-  const [user, setUser] = useState(undefined);
+  const token = localStorage.getItem("token");
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-
-    return unsubscribe;
-  }, []);
-
-  // Show nothing while checking authentication
-  if (user === undefined) {
-    return <h2>Loading...</h2>;
+  if (!token) {
+    return <Navigate to="/login" replace />;
   }
 
-  return user ? <Outlet /> : <Navigate to="/login" replace />;
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

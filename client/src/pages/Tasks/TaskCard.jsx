@@ -7,12 +7,12 @@ function TaskCard({
   updateTask,
 }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editedText, setEditedText] = useState(task.text);
+  const [editedTitle, setEditedTitle] = useState(task.title);
 
-  const handleSave = () => {
-    if (!editedText.trim()) return;
+  const handleSave = async () => {
+    if (!editedTitle.trim()) return;
 
-    updateTask(task.id, editedText);
+    await updateTask(task._id, editedTitle);
 
     setIsEditing(false);
   };
@@ -27,22 +27,21 @@ function TaskCard({
         <input
           type="checkbox"
           checked={task.completed}
-          onChange={() => toggleTask(task.id)}
+          onChange={() => toggleTask(task._id)}
         />
 
         <div className="task-content">
-
           {isEditing ? (
             <input
               className="edit-input"
-              value={editedText}
+              value={editedTitle}
               onChange={(e) =>
-                setEditedText(e.target.value)
+                setEditedTitle(e.target.value)
               }
             />
           ) : (
             <>
-              <span>{task.text}</span>
+              <span>{task.title}</span>
 
               <div className="task-info">
                 <span
@@ -53,13 +52,13 @@ function TaskCard({
 
                 {task.dueDate && (
                   <span className="date">
-                    📅 {task.dueDate}
+                    📅{" "}
+                    {new Date(task.dueDate).toLocaleDateString()}
                   </span>
                 )}
               </div>
             </>
           )}
-
         </div>
       </div>
 
@@ -76,7 +75,7 @@ function TaskCard({
             <button
               className="cancel-btn"
               onClick={() => {
-                setEditedText(task.text);
+                setEditedTitle(task.title);
                 setIsEditing(false);
               }}
             >
@@ -94,7 +93,7 @@ function TaskCard({
 
             <button
               className="delete-btn"
-              onClick={() => deleteTask(task.id)}
+              onClick={() => deleteTask(task._id)}
             >
               🗑
             </button>

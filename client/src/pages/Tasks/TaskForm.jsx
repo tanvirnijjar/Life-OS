@@ -5,13 +5,13 @@ function TaskForm({ addTask }) {
   const [priority, setPriority] = useState("Medium");
   const [dueDate, setDueDate] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!task.trim()) return;
 
-    addTask({
-      text: task.trim(),
+    await addTask({
+      title: task.trim(),
       priority,
       dueDate,
     });

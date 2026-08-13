@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase/firebase";
 import toast from "react-hot-toast";
+import { loginUser } from "../../../services/authService";
 import "./LoginForm.css";
 
 function LoginForm() {
@@ -15,13 +14,26 @@ function LoginForm() {
     e.preventDefault();
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const data = await loginUser({
+        email,
+        password,
+      });
+
+      // Save JWT Token
+      localStorage.setItem("token", data.token);
+
+      // Optional: Save User Data
+      if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+      }
 
       toast.success("🎉 Login Successful!");
 
       navigate("/dashboard");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(
+        error.response?.data?.message || "Login failed"
+      );
     }
   };
 
@@ -62,10 +74,7 @@ function LoginForm() {
         </Link>
       </div>
 
-      <button
-        type="submit"
-        className="login-btn"
-      >
+      <button type="submit" className="login-btn">
         Sign In
       </button>
 

@@ -36,7 +36,7 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.45,
       ease: "easeOut",
     },
   },
@@ -45,21 +45,24 @@ const cardVariants = {
 function Dashboard() {
   const { tasks } = useTasks();
 
+  // ===============================
+  // Dashboard Statistics
+  // ===============================
   const totalTasks = tasks.length;
 
   const completedTasks = tasks.filter(
     (task) => task.completed
   ).length;
 
-  const pendingTasks =
-    totalTasks - completedTasks;
+  const pendingTasks = totalTasks - completedTasks;
 
   const productivity =
-    totalTasks === 0
-      ? 0
-      : Math.round(
-          (completedTasks / totalTasks) * 100
-        );
+    totalTasks > 0
+      ? Math.round((completedTasks / totalTasks) * 100)
+      : 0;
+
+  // Latest 5 tasks
+  const recentTasks = [...tasks].slice(0, 5);
 
   return (
     <motion.div
@@ -69,13 +72,11 @@ function Dashboard() {
       animate="visible"
     >
       {/* Welcome */}
-
       <motion.div variants={cardVariants}>
         <WelcomeCard />
       </motion.div>
 
-      {/* Stats */}
-
+      {/* Statistics */}
       <motion.div variants={cardVariants}>
         <StatsCards
           totalTasks={totalTasks}
@@ -86,13 +87,12 @@ function Dashboard() {
       </motion.div>
 
       {/* Row 1 */}
-
       <div className="dashboard-row row1">
         <motion.div
           className="recent-tasks"
           variants={cardVariants}
         >
-          <RecentTasks tasks={tasks} />
+          <RecentTasks tasks={recentTasks} />
         </motion.div>
 
         <motion.div
@@ -108,7 +108,6 @@ function Dashboard() {
       </div>
 
       {/* Row 2 */}
-
       <div className="dashboard-row row2">
         <motion.div variants={cardVariants}>
           <RecentNotes />
@@ -124,7 +123,6 @@ function Dashboard() {
       </div>
 
       {/* Row 3 */}
-
       <div className="dashboard-row row3">
         <motion.div variants={cardVariants}>
           <PedometerWidget />
@@ -139,8 +137,7 @@ function Dashboard() {
         </motion.div>
       </div>
 
-      {/* Quote */}
-
+      {/* Daily Quote */}
       <motion.div variants={cardVariants}>
         <QuoteCard />
       </motion.div>

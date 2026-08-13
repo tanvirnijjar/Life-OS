@@ -1,25 +1,37 @@
 import { useState } from "react";
-import { registerUser } from "../../services/auth";
+import { registerUser } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     try {
-      await registerUser(email, password);
+      await registerUser({
+        name,
+        email,
+        password,
+      });
 
       toast.success("🎉 Account Created Successfully!");
 
       navigate("/login");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(
+        error.response?.data?.message || "Registration Failed"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,9 +55,23 @@ function Register() {
           boxShadow: "0 0 10px rgba(0,0,0,0.1)",
         }}
       >
-        <h2 style={{ textAlign: "center" }}>
+        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
           Create Account
         </h2>
+
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          style={{
+            width: "100%",
+            padding: "12px",
+            marginBottom: "15px",
+            boxSizing: "border-box",
+          }}
+        />
 
         <input
           type="email"
@@ -56,8 +82,8 @@ function Register() {
           style={{
             width: "100%",
             padding: "12px",
-            marginTop: "20px",
             marginBottom: "15px",
+            boxSizing: "border-box",
           }}
         />
 
@@ -71,11 +97,13 @@ function Register() {
             width: "100%",
             padding: "12px",
             marginBottom: "20px",
+            boxSizing: "border-box",
           }}
         />
 
         <button
           type="submit"
+          disabled={loading}
           style={{
             width: "100%",
             padding: "12px",
@@ -83,11 +111,12 @@ function Register() {
             color: "#fff",
             border: "none",
             borderRadius: "8px",
-            cursor: "pointer",
+            cursor: loading ? "not-allowed" : "pointer",
             fontSize: "16px",
+            opacity: loading ? 0.7 : 1,
           }}
         >
-          Register
+          {loading ? "Creating Account..." : "Register"}
         </button>
       </form>
     </div>
