@@ -14,7 +14,7 @@ import PedometerWidget from "./PedometerWidget";
 import QuickActions from "./QuickActions";
 import UpcomingDeadlines from "./UpcomingDeadlines";
 import QuoteCard from "./QuoteCard";
-
+import DaisyAssistant from "../../components/DaisyAssistant";
 const containerVariants = {
   hidden: {
     opacity: 0,
@@ -71,6 +71,7 @@ function Dashboard() {
       initial="hidden"
       animate="visible"
     >
+      <DaisyAssistant />
       {/* Welcome */}
       <motion.div variants={cardVariants}>
         <WelcomeCard />
@@ -142,6 +143,8 @@ function Dashboard() {
         <QuoteCard />
       </motion.div>
     </motion.div>
+    
+
   );
 }
 
