@@ -5,7 +5,7 @@ const Task = require("../models/Task");
 // ==========================
 const createTask = async (req, res) => {
   try {
-    const { title, priority, dueDate } = req.body;
+    const { title, priority, dueDate, reminderTime } = req.body;
 
     if (!title) {
       return res.status(400).json({
@@ -18,6 +18,7 @@ const createTask = async (req, res) => {
       title,
       priority,
       dueDate,
+      reminderTime,
       user: req.user.id,
     });
 

@@ -1,7 +1,16 @@
 import axios from "axios";
+import { Capacitor } from "@capacitor/core";
+
+const getBaseURL = () => {
+  if (Capacitor.getPlatform() === "android") {
+    return "http://127.0.1.1:8000/api";
+  }
+
+  return "http://192.168.1.40:8000/api";
+};
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api",
+  baseURL: getBaseURL(),
   headers: {
     "Content-Type": "application/json",
   },

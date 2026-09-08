@@ -4,6 +4,7 @@ function TaskForm({ addTask }) {
   const [task, setTask] = useState("");
   const [priority, setPriority] = useState("Medium");
   const [dueDate, setDueDate] = useState("");
+  const [reminderTime, setReminderTime] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,11 +15,13 @@ function TaskForm({ addTask }) {
       title: task.trim(),
       priority,
       dueDate,
+      reminderTime,
     });
 
     setTask("");
     setPriority("Medium");
     setDueDate("");
+    setReminderTime("");
   };
 
   return (
@@ -49,6 +52,13 @@ function TaskForm({ addTask }) {
         type="date"
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
+      />
+
+      <input
+        type="time"
+        value={reminderTime}
+        onChange={(e) => setReminderTime(e.target.value)}
+        title="Reminder time"
       />
 
       <button type="submit">

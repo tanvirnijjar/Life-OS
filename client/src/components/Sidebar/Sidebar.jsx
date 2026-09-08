@@ -124,7 +124,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         className="logout-btn"
         onClick={handleLogout}
       >
-        <FiLogOut />
+        <FiLogOut /> 
         <span>Logout</span>
       </button>
 

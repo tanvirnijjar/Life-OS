@@ -15,6 +15,11 @@ import {
   toggleTask as toggleTaskService,
 } from "../services/taskService";
 
+import {
+  scheduleTaskNotification,
+  cancelTaskNotification,
+} from "../services/notificationService";
+
 const TaskContext = createContext();
 
 export function TaskProvider({ children }) {
@@ -46,6 +51,8 @@ export function TaskProvider({ children }) {
 
       setTasks((prev) => [data.task, ...prev]);
 
+      await scheduleTaskNotification(data.task);
+
       toast.success("✅ Task Added Successfully");
     } catch (error) {
       toast.error(
@@ -67,6 +74,12 @@ export function TaskProvider({ children }) {
           task._id === id ? data.task : task
         )
       );
+
+      if (data.task.completed) {
+        await cancelTaskNotification(id);
+      } else {
+        await scheduleTaskNotification(data.task);
+      }
 
       toast.success(
         data.task.completed
@@ -93,6 +106,9 @@ export function TaskProvider({ children }) {
         )
       );
 
+      await cancelTaskNotification(id);
+      await scheduleTaskNotification(data.task);
+
       toast.success("✏️ Task Updated");
     } catch (error) {
       toast.error("Failed to update task");
@@ -105,6 +121,8 @@ export function TaskProvider({ children }) {
   const deleteTask = async (id) => {
     try {
       await deleteTaskService(id);
+
+      await cancelTaskNotification(id);
 
       setTasks((prev) =>
         prev.filter((task) => task._id !== id)
@@ -133,6 +151,12 @@ export function TaskProvider({ children }) {
       await Promise.all(
         completedTasks.map((task) =>
           deleteTaskService(task._id)
+        )
+      );
+
+      await Promise.all(
+        completedTasks.map((task) =>
+          cancelTaskNotification(task._id)
         )
       );
 

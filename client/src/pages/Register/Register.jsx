@@ -1,34 +1,77 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { registerUser } from "../../services/authService";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import "./Register.css";
 
-function Register() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-  const handleRegister = async (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
+    setMessage("");
+    setError("");
+
+    const { name, email, password, confirmPassword } = formData;
+
+    if (!name || !email || !password || !confirmPassword) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
 
     try {
-      await registerUser({
+      setLoading(true);
+
+      const response = await registerUser({
         name,
         email,
         password,
       });
 
-      toast.success("🎉 Account Created Successfully!");
+      console.log("Registration response:", response);
 
-      navigate("/login");
-    } catch (error) {
-      toast.error(
-        error.response?.data?.message || "Registration Failed"
+      setMessage("Account created successfully! 🎉");
+
+      setFormData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (err) {
+      console.error("Registration error:", err);
+
+      setError(
+        err?.response?.data?.message ||
+          err?.message ||
+          "Registration failed. Please try again."
       );
     } finally {
       setLoading(false);
@@ -36,91 +79,84 @@ function Register() {
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#f5f5f5",
-      }}
-    >
-      <form
-        onSubmit={handleRegister}
-        style={{
-          width: "350px",
-          background: "#fff",
-          padding: "30px",
-          borderRadius: "12px",
-          boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-        }}
-      >
-        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-          Create Account
-        </h2>
+    <div className="register-page">
+      <div className="register-card">
+        <div className="register-header">
+          <h1>Welcome to Life OS 🌱</h1>
+          <p>Create your account and start organizing your life.</p>
+        </div>
 
-        <input
-          type="text"
-          placeholder="Enter Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "15px",
-            boxSizing: "border-box",
-          }}
-        />
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
 
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "15px",
-            boxSizing: "border-box",
-          }}
-        />
+            <input
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Enter your name"
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-            boxSizing: "border-box",
-          }}
-        />
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
 
-        <button
-          type="submit"
-          disabled={loading}
-          style={{
-            width: "100%",
-            padding: "12px",
-            background: "#2563eb",
-            color: "#fff",
-            border: "none",
-            borderRadius: "8px",
-            cursor: loading ? "not-allowed" : "pointer",
-            fontSize: "16px",
-            opacity: loading ? 0.7 : 1,
-          }}
-        >
-          {loading ? "Creating Account..." : "Register"}
-        </button>
-      </form>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Create a password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+
+            <input
+              id="confirmPassword"
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+          </div>
+
+          {error && <p className="register-error">{error}</p>}
+
+          {message && <p className="register-success">{message}</p>}
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating account..." : "Create Account"}
+          </button>
+        </form>
+
+        <div className="register-footer">
+          <p>
+            Already have an account?{" "}
+            <a href="/login">Login</a>
+          </p>
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default Register;
